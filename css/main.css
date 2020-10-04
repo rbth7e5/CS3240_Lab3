@@ -156,11 +156,6 @@ i {
   overflow-x: hidden;
 }
 
-.about-content {
-  display: flex;
-  flex-direction: column;
-}
-
 .about-content h1,
 .about-content p {
   color: white;
@@ -174,13 +169,12 @@ i {
 }
 
 .card {
-  display: flex;
+  flex: 1;
   background-color: transparent;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: none;
   border-radius: 8px;
-  flex: 1;
 }
 
 .spacing-horizontal {
@@ -203,12 +197,6 @@ i {
 
 .card-subtitle {
   color: white;
-}
-
-.card-img-top,
-.card-body {
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .card-img-container {
