@@ -143,6 +143,7 @@ i {
 
 .about-content {
   color: #39393A;
+  overflow: scroll;
 }
 
 .about-content h1, .about-content p {
@@ -153,14 +154,20 @@ i {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 32px;
 }
 
 .card {
+  display: flex;
   background-color: transparent;
   backdrop-filter: blur(20px);
   border: none;
   border-radius: 8px;
+  flex: 1;
+}
+
+.spacing-horizontal {
+  width: 32px;
 }
 
 .card-img, .card-img-top {
