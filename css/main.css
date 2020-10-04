@@ -142,12 +142,19 @@ i {
   overflow: scroll;
 }
 
+.about-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .about-content h1,
 .about-content p {
   color: white;
 }
 
 .about-cards {
+  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -184,6 +191,16 @@ i {
 
 .card-subtitle {
   color: white;
+}
+
+.card-img-top, .card-body {
+  flex: 1;
+}
+
+.card-img-container {
+  height: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .timeline-point {
