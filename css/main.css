@@ -152,7 +152,8 @@ i {
 .about-content,
 .timeline-content {
   color: #39393a;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .about-content {
@@ -206,7 +207,8 @@ i {
 
 .card-img-top,
 .card-body {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .card-img-container {
