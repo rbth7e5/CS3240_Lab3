@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" style="height: 100%">
+  <head>
+    <meta charset="utf-8" />
+    <title>About</title>
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+
+    <link rel="apple-touch-icon" href="assets/icon.png" />
+    <!-- Place favicon.ico in the root directory -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/@fortawesome/fontawesome-free/css/all.css"
+    />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <meta name="theme-color" content="#fafafa" />
+  </head>
+
+  <body class="home">
+    <div class="nav-blur">
+      <ul class="container nav nav-padding">
+        <li class="nav-item">
+          <a class="nav-link font-white" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-white active" href="/about.html">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-white" href="/timeline.html">Timeline</a>
+        </li>
+        <div class="nav-item social-icons">
+          <a href="https://www.github.com/rbth7e5">
+            <i class="fab fa-github" style="cursor: pointer"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/chencaijie/">
+            <i class="fab fa-linkedin-in" style="cursor: pointer"></i>
+          </a>
+          <a href="https://join.skype.com/invite/VO9c4PWBf334">
+            <i class="fab fa-skype" style="cursor: pointer"></i>
+          </a>
+        </div>
+        <div class="nav-item nav-buttons">
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm"
+            onclick="location.href='mailto:caijie96@gmail.com'"
+          >
+            Email Me
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm"
+            onclick="downloadResume()"
+          >
+            My Resume
+          </button>
+          <a id="download-resume" href="assets/resume.pdf"></a>
+          <a id="download-local" href="assets/resume_sg.pdf"></a>
+        </div>
+      </ul>
+    </div>
+    <div class="container about-content">
+      <h1>Projects</h1>
+      <div
+              id="project-carousel"
+              class="carousel slide nav-blur"
+              data-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="project-main">
+              <div
+                      class="project-image"
+                      style="background-image: url('assets/ground-zero.png')"
+              ></div>
+              <div class="project-desc">
+                <h1>I won category champions at Ground Zero 2020!</h1>
+                <p>
+                  Over the weekend, I participated in Ground Zero 2020 with a
+                  bunch of schoolmates from NUS. I had a tough time
+                  trying to figure out if our idea is technically feasible on iOS,
+                  a platform known for its well-intentioned security and privacy
+                  features. P.S. I came up with the ingenious name
+                  PhishPatrol :P
+                </p>
+                <div>
+                  <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                          onclick="location.href='mailto:caijie96@gmail.com'"
+                  >
+                    View Project
+                  </button>
+                  <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                          onclick="downloadResume()"
+                  >
+                    Host Website
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="project-main">
+              <div
+                      class="project-image"
+                      style="background-image: url('assets/hack-nyu.jpg')"
+              ></div>
+              <div class="project-desc">
+                <h1>I won Best Use of Google APIs at Hack NYU 2020!</h1>
+                <p>
+                  I teamed up with fellow NOC-mates to build BagX, a mobile
+                  application that facilitates and tracks the borrowing, returning
+                  and donating of reusable shopping bags among the NYU student
+                  community. We built the app with React Native and Google Firebase.
+                </p>
+                <div>
+                  <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                          onclick="location.href='mailto:caijie96@gmail.com'"
+                  >
+                    View Project
+                  </button>
+                  <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                          onclick="downloadResume()"
+                  >
+                    Host Website
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="project-main">
+              <div
+                      class="project-image"
+                      style="background-image: url('assets/hack-cewit.jpeg')"
+              ></div>
+              <div class="project-desc">
+                <h1>I won Best Newbie Hack at Hack@CEWIT 2020!</h1>
+                <p>
+                  I spent a weekend away at Stony Brook University with a bunch of NOC-mates to attend Hack@CEWIT.
+                  We built Agora, a web platform that creates powerful conversations between individuals, wherever they are in the world.
+                  Individuals can anonymously submit questions they have, and the platform links these questions with members on the platform most qualified to respond to them.
+                </p>
+                <div>
+                  <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                          onclick="location.href='mailto:caijie96@gmail.com'"
+                  >
+                    View Project
+                  </button>
+                  <button
+                          type="button"
+                          class="btn btn-outline-light btn-sm"
+                          onclick="downloadResume()"
+                  >
+                    Host Website
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+                class="carousel-control-prev"
+                href="#project-carousel"
+                role="button"
+                data-slide="prev"
+        >
+          <i class="fas fa-arrow-circle-left"></i>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+                class="carousel-control-next"
+                href="#project-carousel"
+                role="button"
+                data-slide="next"
+        >
+          <i class="fas fa-arrow-circle-right"></i>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <h1>Work Experience</h1>
+      <div class="about-cards">
+        <div class="card" style="width: 20rem;">
+          <img height="220" src="assets/trabble.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Trabble</h5>
+            <h6 class="card-subtitle mb-2">Software Engineer Intern</h6>
+            <p class="card-text">Built a facility/meeting booking web application using Blazor. I joined Trabble after being recalled from New York due to COVID-19.</p>
+          </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+          <img height="220" src="assets/coord.jpeg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Coord</h5>
+            <h6 class="card-subtitle mb-2">Software Engineer Intern</h6>
+            <p class="card-text">A year long internship I took as part of the NUS Overseas College program. It was cut short due to COVID-19. Pictured here is Sara, my colleague!</p>
+          </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+          <img height="220" src="assets/dateideas.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">DateIdeas</h5>
+            <h6 class="card-subtitle mb-2">Software Engineer Intern</h6>
+            <p class="card-text">My very first internship at a very small startup doing digital marketing. I built the front-end of their website using Vue.js</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
