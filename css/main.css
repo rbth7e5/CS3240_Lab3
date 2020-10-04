@@ -44,7 +44,7 @@ body {
 
 .nav-blur,
 .intro-content,
-.about-content h1,
+.about-content .title,
 .timeline-point-divider-year {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
