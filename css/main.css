@@ -38,6 +38,7 @@ body {
 
 .nav-blur, .intro-content {
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .nav-shadow {
@@ -153,6 +154,7 @@ i {
   display: flex;
   background-color: transparent;
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: none;
   border-radius: 8px;
   flex: 1;
