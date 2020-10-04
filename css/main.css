@@ -158,7 +158,6 @@ i {
 .about-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
 .about-content h1,
@@ -167,7 +166,6 @@ i {
 }
 
 .about-cards {
-  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -206,12 +204,13 @@ i {
   color: white;
 }
 
-.card-img-top, .card-body {
-  flex: 1;
+.card-img-top,
+.card-body {
+  overflow: scroll;
 }
 
 .card-img-container {
-  height: 100%;
+  height: 180px;
   background-size: cover;
   background-position: center;
 }
