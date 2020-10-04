@@ -5,7 +5,8 @@ body {
 }
 
 .home,
-.about {
+.about,
+.timeline {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -19,7 +20,11 @@ body {
 }
 
 .about {
-  background-image: url("../assets/cover.jpeg");
+  background-image: url("../assets/about.jpeg");
+}
+
+.timeline {
+  background-image: url("../assets/timeline.jpeg");
 }
 
 .intro {
@@ -70,8 +75,8 @@ body {
 .nav a:hover,
 .nav i:hover,
 .nav-item .active {
-  background-color: #6c757d;
-  color: white;
+  background-color: white;
+  color: #6c757d;
   border-radius: 4px;
 }
 
@@ -133,6 +138,14 @@ i {
 
 .carousel i {
   font-size: 32px;
+}
+
+.carousel-icon {
+  color: transparent;
+  padding: 100%;
+}
+
+.carousel-icon:hover {
   color: white;
 }
 
