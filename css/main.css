@@ -9,7 +9,7 @@ body {
 .timeline {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center bottom;
   color: white;
   display: flex;
   flex-direction: column;
@@ -43,9 +43,17 @@ body {
 }
 
 .nav-blur,
-.intro-content {
+.intro-content,
+.about-content h1,
+.timeline-point-divider-year {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+.about-content h1 {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .nav-shadow {
@@ -247,7 +255,9 @@ i {
 
 .timeline-point-divider-year {
   text-align: center;
-  margin: 4px;
+  margin: 8px;
   color: white;
   font-size: 18px;
+  padding: 8px;
+  border-radius: 8px;
 }
