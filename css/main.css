@@ -134,7 +134,7 @@ i {
   color: white;
 }
 
-.about-content {
+.about-content, .timeline-content {
   color: #39393A;
   overflow: scroll;
 }
@@ -179,4 +179,48 @@ i {
 
 .card-subtitle {
   color: white;
+}
+
+.timeline-point {
+  display: flex;
+  flex-direction: row;
+}
+
+.timeline-point-image, .timeline-point-desc {
+  flex: 1;
+  margin: 32px 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16px;
+}
+
+.timeline-point-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.timeline-point-desc {
+  color: white;
+}
+
+.timeline-point-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 2px;
+  margin: 0 32px;
+  flex: 1;
+}
+
+.timeline-point-divider-top, .timeline-point-divider-bottom {
+  background-color: white;
+  width: 100%;
+  flex: 1;
+}
+
+.timeline-point-divider-year {
+  text-align: center;
+  margin: 4px;
+  color: white;
+  font-size: 18px;
 }
