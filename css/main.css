@@ -9,7 +9,7 @@ body {
 .timeline {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: left top;
   color: white;
   display: flex;
   flex-direction: column;
