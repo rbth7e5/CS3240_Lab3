@@ -4,7 +4,8 @@ body {
   height: 100%;
 }
 
-.home, .about {
+.home,
+.about {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -36,7 +37,8 @@ body {
   border-radius: 8px;
 }
 
-.nav-blur, .intro-content {
+.nav-blur,
+.intro-content {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -134,12 +136,14 @@ i {
   color: white;
 }
 
-.about-content, .timeline-content {
-  color: #39393A;
+.about-content,
+.timeline-content {
+  color: #39393a;
   overflow: scroll;
 }
 
-.about-content h1, .about-content p {
+.about-content h1,
+.about-content p {
   color: white;
 }
 
@@ -164,7 +168,8 @@ i {
   width: 32px;
 }
 
-.card-img, .card-img-top {
+.card-img,
+.card-img-top {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
@@ -186,12 +191,14 @@ i {
   flex-direction: row;
 }
 
-.timeline-point-image, .timeline-point-desc {
+.timeline-point-image,
+.timeline-point-desc {
   flex: 1;
   margin: 32px 0;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 16px;
+  border-radius: 8px;
 }
 
 .timeline-point-image {
@@ -212,7 +219,8 @@ i {
   flex: 1;
 }
 
-.timeline-point-divider-top, .timeline-point-divider-bottom {
+.timeline-point-divider-top,
+.timeline-point-divider-bottom {
   background-color: white;
   width: 100%;
   flex: 1;
