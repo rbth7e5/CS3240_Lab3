@@ -123,14 +123,6 @@ i {
   background-color: transparent;
 }
 
-.carousel-control-prev {
-  margin-left: -128px;
-}
-
-.carousel-control-next {
-  margin-right: -128px;
-}
-
 .carousel {
   padding: 16px;
   border-radius: 8px;
