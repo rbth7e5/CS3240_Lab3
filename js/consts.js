@@ -1,3 +1,5 @@
+import anime from "animejs";
+
 export const sg_geojson = {
   type: "FeatureCollection",
   features: [
@@ -44,4 +46,167 @@ export const sg_geojson = {
       },
     },
   ],
+};
+
+const sections = document.querySelectorAll("section[id]");
+export const navHighlighter = () => {
+  // Get current scroll position
+  let scrollY = document.getElementById("scroll-container").scrollTop;
+  // Now we loop through sections to get height, top and ID values for each
+  sections.forEach((current) => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 50;
+    const sectionId = current.getAttribute("id");
+    const elementClasses = document.querySelector(
+      ".nav a[href*=" + sectionId + "]"
+    ).classList;
+    const listClasses = document.querySelector(
+      ".nav-list a[href*=" + sectionId + "]"
+    ).classList;
+
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      elementClasses.add("active-light");
+      listClasses.add("active-light");
+    } else {
+      elementClasses.remove("active-light");
+      listClasses.remove("active-light");
+    }
+  });
+};
+
+export const dragElement = (elmnt) => {
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+};
+
+const avatar = document.getElementById("avatar");
+export const navAnimeRestore = anime({
+  targets: "#navbar",
+  translateX: [-avatar.offsetLeft - 128, 0],
+  translateY: [256, 0],
+  width: [0, "100%"],
+  height: [0, 56],
+  opacity: 1,
+  autoplay: false,
+  easing: "easeOutExpo",
+  duration: 500,
+  delay: 250,
+});
+export const navAnime = anime({
+  targets: "#navbar",
+  translateX: [0, -avatar.offsetLeft - 128],
+  translateY: [0, 256],
+  width: ["100%", 0],
+  height: [56, 0],
+  opacity: 0,
+  autoplay: false,
+  easing: "easeOutExpo",
+  duration: 500,
+});
+
+const avatarAnimeRestore = anime({
+  targets: "#avatar",
+  translateX: [-160, 0],
+  translateY: [-320, 0],
+  autoplay: false,
+  easing: "easeOutElastic(1, 1)",
+  duration: 500,
+});
+const avatarAnime = anime({
+  targets: "#avatar",
+  translateX: [0, -160],
+  translateY: [0, -320],
+  autoplay: false,
+  easing: "easeOutElastic(1, 1)",
+  duration: 500,
+});
+const navListAnimeRestore = anime({
+  targets: ".nav-list .list-icon",
+  translateX: [0, 100],
+  opacity: [1, 0],
+  delay: anime.stagger(30),
+  duration: 250,
+  autoplay: false,
+});
+const navListAnime = anime({
+  targets: ".nav-list .list-icon",
+  translateX: [100, 0],
+  opacity: [0, 1],
+  delay: anime.stagger(100),
+  duration: 500,
+  autoplay: false,
+});
+export const navAnimator = () => {
+  let scrollY = document.getElementById("scroll-container").scrollTop;
+  const nav = document.getElementById("navbar");
+  if (
+    scrollY !== 0 &&
+    nav.style.transform === "translateX(0px) translateY(0px)"
+  ) {
+    navAnime.play();
+    avatarAnime.play();
+    navListAnime.play();
+    /*
+    let pos = 0;
+    let width = nav.offsetWidth;
+    let left = 0;
+    const initWidth = nav.offsetWidth;
+    const initTop = avatar.offsetTop;
+    console.log(avatar.offsetLeft);
+    let timer = setInterval(() => {
+      pos++;
+      width -= initWidth/initTop;
+      left += avatar.offsetLeft/initTop;
+      nav.style.top = pos + 'px';
+      nav.style.width = width + 'px';
+      nav.style.left = left + 'px';
+      if (pos === avatar.offsetTop) {
+        nav.style.display = 'none';
+        clearInterval(timer);
+      }
+    }, 0.25);*/
+  } else if (scrollY === 0) {
+    navListAnimeRestore.play();
+    navAnimeRestore.play();
+    avatarAnimeRestore.play();
+  }
 };

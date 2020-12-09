@@ -15,11 +15,10 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  padding-top: 56px;
 }
 
 .home {
-  height: calc(100vh - 56px);
+  height: 100vh;
 }
 
 .background {
@@ -30,6 +29,28 @@ body {
   height: 100vh;
   width: 100vw;
   z-index: -1;
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.mask circle {
+  r: 100%;
+  animation: spotlight 0.5s ease 1;
+  animation-fill-mode: forwards;
+  animation-delay: 500ms;
+}
+
+@keyframes spotlight {
+  to {
+    r: 0;
+  }
 }
 
 .intro {
@@ -45,21 +66,43 @@ body {
 
 .intro-content {
   border-radius: 8px;
+  z-index: 998;
 }
 
-.nav-blur {
-  position: sticky;
+.nav {
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 999;
 }
 
-.nav-blur,
+#navbar {
+  top: 0;
+  overflow: hidden;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: -32px;
+}
+
+.nav,
+.nav-list,
+a {
+  color: white;
+}
+
+/*
 .intro-content,
 .about-content .title,
-.timeline-point-divider-year {
+.timeline-point-divider-year,
+.blur {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-}
+}*/
 
 .about-content h1 {
   display: inline-block;
@@ -86,14 +129,29 @@ body {
   width: 180px;
 }
 
+.nav-buttons .btn {
+  color: white;
+  border-color: white;
+}
+
 .nav-link {
   padding: 0.25rem 0.5rem;
   margin: 0.25rem 0.5rem;
 }
 
+.nav i,
+.nav-list i {
+  color: inherit;
+  padding: 4px;
+}
+
 .nav a:hover,
+.nav-list a:hover,
 .nav i:hover,
-.nav-item .active {
+.nav-list i:hover,
+.nav-list .active-light,
+.nav-item .active,
+.btn:hover {
   background-color: white;
   color: #6c757d;
   border-radius: 4px;
@@ -104,11 +162,6 @@ body {
   background-color: white;
   color: #6c757d;
   border-radius: 4px;
-}
-
-i {
-  color: #6c757d;
-  padding: 4px;
 }
 
 .social-icons {
@@ -122,6 +175,40 @@ i {
 
 .font-black {
   color: #6c757d;
+}
+
+.focus-circle {
+  background-color: black;
+}
+
+.avatar-container {
+  position: absolute;
+  top: calc(50vh - 64px);
+  left: calc(25% - 64px);
+  z-index: 9999;
+  width: 128px;
+  height: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  box-shadow: 0 0 8px 1px black;
+  animation: avatar-popup 0.5s ease 1;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  cursor: move;
+}
+
+@keyframes avatar-popup {
+  to {
+    width: 128px;
+    height: 128px;
+  }
 }
 
 .project-main {

@@ -1,6 +1,6 @@
 import booleanContains from "@turf/boolean-contains";
 import { point, polygon } from "@turf/helpers";
-import { sg_geojson } from "./consts";
+import { sg_geojson, navHighlighter, dragElement, navAnimator } from "./consts";
 
 window.downloadResume = function () {
   if (navigator.geolocation) {
@@ -25,3 +25,14 @@ window.downloadResume = function () {
     document.getElementById("download-resume").click();
   }
 };
+
+document.getElementById("resume-icon").onclick = downloadResume;
+
+// Add an event listener listening for scroll
+document
+  .getElementById("scroll-container")
+  .addEventListener("scroll", navHighlighter);
+document
+  .getElementById("scroll-container")
+  .addEventListener("scroll", navAnimator);
+dragElement(document.getElementById("avatar"));

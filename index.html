@@ -33,54 +33,95 @@
   </head>
 
   <body class="background">
-    <div class="scroll-container">
-      <div class="nav-blur">
-        <ul class="container nav nav-padding">
-          <li class="nav-item">
-            <a class="nav-link font-black active-light light-nav" href="#home"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link font-white light-nav" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link font-white light-nav" href="#timeline"
-              >Timeline</a
-            >
-          </li>
-          <div class="nav-item social-icons">
-            <a href="https://www.github.com/rbth7e5">
-              <i class="fab fa-github" style="cursor: pointer"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/chencaijie/">
-              <i class="fab fa-linkedin-in" style="cursor: pointer"></i>
-            </a>
-            <a href="https://join.skype.com/invite/VO9c4PWBf334">
-              <i class="fab fa-skype" style="cursor: pointer"></i>
-            </a>
-          </div>
-          <div class="nav-item nav-buttons">
-            <button
-              type="button"
-              class="btn btn-outline-secondary btn-sm"
-              onclick="location.href='mailto:caijie96@gmail.com'"
-            >
-              Email Me
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-secondary btn-sm"
-              onclick="downloadResume()"
-            >
-              My Resume
-            </button>
-            <a id="download-resume" href="assets/resume.pdf"></a>
-            <a id="download-local" href="assets/resume_sg.pdf"></a>
-          </div>
-        </ul>
+    <svg viewbox="0 0 100vw 100vh" class="mask">
+      <defs>
+        <mask id="mask" x="0" y="0" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" fill="#fff" />
+          <circle cx="25%" cy="50%" r="15%" />
+        </mask>
+      </defs>
+      <rect
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+        mask="url(#mask)"
+        fill-opacity="0.7"
+      />
+    </svg>
+    <div id="avatar" class="avatar-container">
+      <img src="assets/avatar.jpg" alt="CJ" class="avatar" />
+      <div id="navbar-list" class="nav-list">
+        <a class="list-icon" href="#home">
+          <i class="fas fa-home" style="cursor: pointer"></i>
+        </a>
+        <a class="list-icon" href="#about">
+          <i class="fas fa-address-card" style="cursor: pointer"></i>
+        </a>
+        <a class="list-icon" href="#timeline">
+          <i class="fas fa-stream" style="cursor: pointer"></i>
+        </a>
+        <a class="list-icon" href="https://www.github.com/rbth7e5">
+          <i class="fab fa-github" style="cursor: pointer"></i>
+        </a>
+        <a class="list-icon" href="https://www.linkedin.com/in/chencaijie/">
+          <i class="fab fa-linkedin-in" style="cursor: pointer"></i>
+        </a>
+        <a class="list-icon" href="https://join.skype.com/invite/VO9c4PWBf334">
+          <i class="fab fa-skype" style="cursor: pointer"></i>
+        </a>
+        <a class="list-icon" href="mailto:caijie96@gmail.com">
+          <i class="far fa-envelope" style="cursor: pointer"></i>
+        </a>
+        <span class="list-icon">
+          <i id="resume-icon" class="far fa-file" style="cursor: pointer"></i>
+        </span>
       </div>
-      <div id="home" class="home">
+    </div>
+    <div id="scroll-container" class="scroll-container">
+      <ul id="navbar" class="container nav nav-padding">
+        <li class="nav-item">
+          <a class="nav-link font-white active-light light-nav" href="#home"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-white light-nav" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-white light-nav" href="#timeline">Timeline</a>
+        </li>
+        <div class="nav-item social-icons">
+          <a href="https://www.github.com/rbth7e5">
+            <i class="fab fa-github" style="cursor: pointer"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/chencaijie/">
+            <i class="fab fa-linkedin-in" style="cursor: pointer"></i>
+          </a>
+          <a href="https://join.skype.com/invite/VO9c4PWBf334">
+            <i class="fab fa-skype" style="cursor: pointer"></i>
+          </a>
+        </div>
+        <div class="nav-item nav-buttons">
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm"
+            onclick="location.href='mailto:caijie96@gmail.com'"
+          >
+            Email Me
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm"
+            onclick="downloadResume()"
+          >
+            My Resume
+          </button>
+          <a id="download-resume" href="assets/resume.pdf"></a>
+          <a id="download-local" href="assets/resume_sg.pdf"></a>
+        </div>
+      </ul>
+      <section id="home" class="home">
         <div class="intro">
           <div class="intro-content">
             <h1>Hello I'm Caijie</h1>
@@ -91,13 +132,13 @@
             </p>
           </div>
         </div>
-      </div>
-      <div id="about" class="about">
+      </section>
+      <section id="about" class="about">
         <div class="container about-content">
           <h1 class="title">Projects</h1>
           <div
             id="project-carousel"
-            class="carousel slide nav-blur"
+            class="carousel slide blur"
             data-ride="carousel"
           >
             <div class="carousel-inner">
@@ -272,8 +313,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div id="timeline" class="timeline">
+      </section>
+      <section id="timeline" class="timeline">
         <div class="container timeline-content">
           <div class="timeline-point">
             <div
@@ -518,7 +559,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
     <script src="js/vendor/modernizr-3.11.2.min.js"></script>
     <script src="js/plugins.js"></script>
