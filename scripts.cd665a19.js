@@ -4504,11 +4504,11 @@ var navHighlighter = function navHighlighter() {
           break;
 
         case "about":
-          document.getElementById("avatar-text").innerText = "All about me!";
+          document.getElementById("avatar-text").innerText = "All About Me";
           break;
 
         case "timeline":
-          document.getElementById("avatar-text").innerText = "My timeline";
+          document.getElementById("avatar-text").innerText = "My Timeline";
           break;
       }
 
@@ -4650,6 +4650,16 @@ var navListAnime = (0, _animejs.default)({
   zIndex: [-1, 998]
 });
 exports.navListAnime = navListAnime;
+var introTextAnimeRestore = (0, _animejs.default)({
+  targets: "#intro-text",
+  opacity: 1,
+  autoplay: false
+});
+var introTextAnime = (0, _animejs.default)({
+  targets: "#intro-text",
+  opacity: 0,
+  autoplay: false
+});
 var navToggle = false;
 
 var navAnimator = function navAnimator() {
@@ -4660,11 +4670,13 @@ var navAnimator = function navAnimator() {
     navAnime.play();
     avatarAnime.play();
     navListAnime.play();
+    introTextAnime.play();
     navToggle = true; // Fix animation playing twice when user over scrolls and it bounces back.
   } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
     navListAnimeRestore.play();
     navAnimeRestore.play();
     avatarAnimeRestore.play();
+    introTextAnimeRestore.play();
     navToggle = false;
   }
 };
@@ -4736,7 +4748,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58579" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57231" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
