@@ -67,6 +67,7 @@ body {
 .intro-content {
   border-radius: 8px;
   z-index: 998;
+  padding-top: 80px;
 }
 
 .nav {
@@ -303,8 +304,9 @@ a {
 .card {
   flex: 1;
   background-color: transparent;
+  /*
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);*/
   border: none;
   border-radius: 8px;
 }
@@ -346,8 +348,8 @@ a {
 .timeline-point-desc {
   flex: 1;
   margin: 32px 0;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /*backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);*/
   padding: 16px;
   border-radius: 8px;
 }
@@ -388,6 +390,43 @@ a {
 
 #avatar:hover {
   opacity: 1 !important;
+}
+
+.speech-bubble {
+  position: absolute;
+  left: 180px;
+  top: -16px;
+  background: white;
+  color: black;
+  border-radius: 0.4em;
+  padding: 8px;
+  font-size: 24px;
+  white-space: nowrap;
+  opacity: 0;
+  animation: speech-bubble-anim 0.5s ease 1;
+  animation-fill-mode: forwards;
+  animation-delay: 1000ms;
+}
+
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-right-color: white;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -10px;
+  margin-left: -20px;
+}
+
+@keyframes speech-bubble-anim {
+  to {
+    opacity: 1;
+  }
 }
 
 
