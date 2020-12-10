@@ -236,7 +236,6 @@ export const navAnimator = () => {
   }
 };
 export const resizeListener = () => {
-  console.log("hello");
   avatarOrigTopOffset = window.innerHeight / 2 - 64;
   avatarOrigLeftOffset = window.innerWidth / 4 - 64;
   avatarCurrentTopOffset = window.innerHeight / 2 - 64;
