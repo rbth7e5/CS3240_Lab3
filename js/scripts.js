@@ -1,6 +1,12 @@
 import booleanContains from "@turf/boolean-contains";
 import { point, polygon } from "@turf/helpers";
-import { sg_geojson, navHighlighter, dragElement, navAnimator } from "./consts";
+import {
+  sg_geojson,
+  navHighlighter,
+  dragElement,
+  navAnimator,
+  resizeListener,
+} from "./consts";
 
 window.downloadResume = function () {
   if (navigator.geolocation) {
@@ -36,3 +42,5 @@ document
   .getElementById("scroll-container")
   .addEventListener("scroll", navAnimator, { capture: true, passive: true });
 dragElement(document.getElementById("avatar"));
+
+window.addEventListener("resize", resizeListener);

@@ -130,12 +130,12 @@ export const dragElement = (elmnt) => {
 };
 
 const avatar = document.getElementById("avatar");
-const avatarOrigTopOffset = window.innerHeight / 2 - 64;
-const avatarOrigLeftOffset = window.innerWidth / 4 - 64;
+let avatarOrigTopOffset = window.innerHeight / 2 - 64;
+let avatarOrigLeftOffset = window.innerWidth / 4 - 64;
 const avatarNewTopOffset = 64;
 const avatarNewLeftOffset = 128;
-const avatarCurrentTopOffset = avatar.offsetTop;
-const avatarCurrentLeftOffset = avatar.offsetLeft;
+let avatarCurrentTopOffset = avatar.offsetTop;
+let avatarCurrentLeftOffset = avatar.offsetLeft;
 export const navAnimeRestore = anime({
   targets: "#navbar",
   top: [avatarCurrentTopOffset, 0],
@@ -159,7 +159,7 @@ export const navAnime = anime({
   easing: "easeOutExpo",
   duration: 250,
 });
-const avatarAnimeRestore = anime({
+let avatarAnimeRestore = anime({
   targets: "#avatar",
   top: [avatarCurrentTopOffset, avatarOrigTopOffset],
   left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
@@ -234,4 +234,23 @@ export const navAnimator = () => {
     introTextAnimeRestore.play();
     navToggle = false;
   }
+};
+export const resizeListener = () => {
+  console.log("hello");
+  avatarOrigTopOffset = window.innerHeight / 2 - 64;
+  avatarOrigLeftOffset = window.innerWidth / 4 - 64;
+  avatarCurrentTopOffset = window.innerHeight / 2 - 64;
+  avatarCurrentLeftOffset = window.innerWidth / 4 - 64;
+  avatarAnimeRestore = anime({
+    targets: "#avatar",
+    top: [avatarCurrentTopOffset, avatarOrigTopOffset],
+    left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
+    autoplay: false,
+    opacity: 1,
+    easing: "easeOutElastic(1, 1)",
+    duration: 500,
+    delay: 500,
+  });
+  document.getElementById("avatar").style.top = avatarCurrentTopOffset + "px";
+  document.getElementById("avatar").style.left = avatarCurrentLeftOffset + "px";
 };
