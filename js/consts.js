@@ -65,6 +65,17 @@ export const navHighlighter = () => {
     ).classList;
 
     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      switch (sectionId) {
+        case "home":
+          document.getElementById("avatar-text").innerText = "Hello I'm Caijie";
+          break;
+        case "about":
+          document.getElementById("avatar-text").innerText = "All about me!";
+          break;
+        case "timeline":
+          document.getElementById("avatar-text").innerText = "My timeline";
+          break;
+      }
       elementClasses.add("active-light");
       listClasses.add("active-light");
     } else {
@@ -163,7 +174,7 @@ const avatarAnime = anime({
   top: [avatarCurrentTopOffset, avatarNewTopOffset],
   left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
-  opacity: 0.5,
+  opacity: 0.75,
   easing: "easeOutElastic(1, 1)",
   duration: 500,
 });
