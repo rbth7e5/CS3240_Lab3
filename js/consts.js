@@ -143,37 +143,46 @@ export const navAnime = anime({
   duration: 500,
 });
 
+const avatarOrigTopOffset = window.innerHeight / 2 - 64;
+const avatarOrigLeftOffset = window.innerWidth / 4 - 64;
+const avatarNewTopOffset = 64;
+const avatarNewLeftOffset = 128;
+const avatarCurrentTopOffset = avatar.offsetTop;
+const avatarCurrentLeftOffset = avatar.offsetLeft;
 const avatarAnimeRestore = anime({
   targets: "#avatar",
-  translateX: [-160, 0],
-  translateY: [-320, 0],
+  top: [avatarCurrentTopOffset, avatarOrigTopOffset],
+  left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
   easing: "easeOutElastic(1, 1)",
   duration: 500,
 });
 const avatarAnime = anime({
   targets: "#avatar",
-  translateX: [0, -160],
-  translateY: [0, -320],
+  top: [avatarCurrentTopOffset, avatarNewTopOffset],
+  left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
   easing: "easeOutElastic(1, 1)",
   duration: 500,
 });
-const navListAnimeRestore = anime({
+export const navListAnimeRestore = anime({
   targets: ".nav-list .list-icon",
   translateX: [0, 100],
   opacity: [1, 0],
   delay: anime.stagger(30),
   duration: 250,
   autoplay: false,
+  zIndex: [9999, -1],
 });
-const navListAnime = anime({
+let navListOpen = false;
+export const navListAnime = anime({
   targets: ".nav-list .list-icon",
   translateX: [100, 0],
   opacity: [0, 1],
   delay: anime.stagger(100),
   duration: 500,
   autoplay: false,
+  zIndex: [-1, 9999],
 });
 export const navAnimator = () => {
   let scrollY = document.getElementById("scroll-container").scrollTop;
@@ -185,28 +194,49 @@ export const navAnimator = () => {
     navAnime.play();
     avatarAnime.play();
     navListAnime.play();
-    /*
-    let pos = 0;
-    let width = nav.offsetWidth;
-    let left = 0;
-    const initWidth = nav.offsetWidth;
-    const initTop = avatar.offsetTop;
-    console.log(avatar.offsetLeft);
-    let timer = setInterval(() => {
-      pos++;
-      width -= initWidth/initTop;
-      left += avatar.offsetLeft/initTop;
-      nav.style.top = pos + 'px';
-      nav.style.width = width + 'px';
-      nav.style.left = left + 'px';
-      if (pos === avatar.offsetTop) {
-        nav.style.display = 'none';
-        clearInterval(timer);
-      }
-    }, 0.25);*/
-  } else if (scrollY === 0) {
+    navListOpen = true;
+    // Fix animation playing twice when user over scrolls and it bounces back.
+  } else if (
+    scrollY === 0 &&
+    Math.abs(
+      Math.round(
+        parseInt(
+          window
+            .getComputedStyle(nav)
+            .transform.match(/matrix.*\((.+)\)/)[1]
+            .split(", ")[4]
+        )
+      )
+    ) !== 0
+  ) {
     navListAnimeRestore.play();
+    navListOpen = false;
     navAnimeRestore.play();
     avatarAnimeRestore.play();
+  }
+};
+
+export const navListAnimator = (event) => {
+  event.stopPropagation();
+  if (navListOpen) {
+    navListAnimeRestore.play();
+    navListOpen = false;
+  } else {
+    navListAnime.play();
+    navListOpen = true;
+  }
+};
+
+export const mouseUpHandler = () => {
+  if (!navListOpen) {
+    navListAnime.play();
+    navListOpen = true;
+  }
+};
+
+export const mouseDownHandler = () => {
+  if (navListOpen) {
+    navListAnimeRestore.play();
+    navListOpen = false;
   }
 };

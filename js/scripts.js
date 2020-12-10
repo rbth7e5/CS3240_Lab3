@@ -1,6 +1,14 @@
 import booleanContains from "@turf/boolean-contains";
 import { point, polygon } from "@turf/helpers";
-import { sg_geojson, navHighlighter, dragElement, navAnimator } from "./consts";
+import {
+  sg_geojson,
+  navHighlighter,
+  dragElement,
+  navAnimator,
+  navListAnimator,
+  mouseUpHandler,
+  mouseDownHandler,
+} from "./consts";
 
 window.downloadResume = function () {
   if (navigator.geolocation) {
@@ -36,3 +44,8 @@ document
   .getElementById("scroll-container")
   .addEventListener("scroll", navAnimator);
 dragElement(document.getElementById("avatar"));
+
+document.getElementById("avatar").addEventListener("mouseup", mouseUpHandler);
+document
+  .getElementById("avatar")
+  .addEventListener("mousedown", mouseDownHandler);
