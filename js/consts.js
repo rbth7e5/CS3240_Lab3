@@ -133,7 +133,7 @@ const avatar = document.getElementById("avatar");
 let avatarOrigTopOffset = window.innerHeight / 2 - 64;
 let avatarOrigLeftOffset = window.innerWidth / 4 - 64;
 const avatarNewTopOffset = 64;
-const avatarNewLeftOffset = 128;
+const avatarNewLeftOffset = 64;
 let avatarCurrentTopOffset = avatar.offsetTop;
 let avatarCurrentLeftOffset = avatar.offsetLeft;
 export const navAnimeRestore = anime({
@@ -145,7 +145,6 @@ export const navAnimeRestore = anime({
   opacity: 1,
   autoplay: false,
   easing: "easeOutExpo",
-  duration: 250,
   delay: 250,
 });
 export const navAnime = anime({
