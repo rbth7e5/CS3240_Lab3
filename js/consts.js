@@ -70,10 +70,10 @@ export const navHighlighter = () => {
           document.getElementById("avatar-text").innerText = "Hello I'm Caijie";
           break;
         case "about":
-          document.getElementById("avatar-text").innerText = "All about me!";
+          document.getElementById("avatar-text").innerText = "All About Me";
           break;
         case "timeline":
-          document.getElementById("avatar-text").innerText = "My timeline";
+          document.getElementById("avatar-text").innerText = "My Timeline";
           break;
       }
       elementClasses.add("active-light");
@@ -206,6 +206,16 @@ export const navListAnime = anime({
   autoplay: false,
   zIndex: [-1, 998],
 });
+const introTextAnimeRestore = anime({
+  targets: "#intro-text",
+  opacity: 1,
+  autoplay: false,
+});
+const introTextAnime = anime({
+  targets: "#intro-text",
+  opacity: 0,
+  autoplay: false,
+});
 let navToggle = false;
 export const navAnimator = () => {
   let scrollY = document.getElementById("scroll-container").scrollTop;
@@ -214,12 +224,14 @@ export const navAnimator = () => {
     navAnime.play();
     avatarAnime.play();
     navListAnime.play();
+    introTextAnime.play();
     navToggle = true;
     // Fix animation playing twice when user over scrolls and it bounces back.
   } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
     navListAnimeRestore.play();
     navAnimeRestore.play();
     avatarAnimeRestore.play();
+    introTextAnimeRestore.play();
     navToggle = false;
   }
 };

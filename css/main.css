@@ -65,9 +65,17 @@ body {
 }
 
 .intro-content {
+  pointer-events: none;
+  position: absolute;
+  top: 50vh;
+  left: calc(25% + 96px);
   border-radius: 8px;
   z-index: 998;
-  padding-top: 80px;
+  max-width: 50vw;
+  opacity: 0;
+  animation: speech-bubble-anim 0.5s ease 1;
+  animation-fill-mode: forwards;
+  animation-delay: 1200ms;
 }
 
 .nav {
@@ -403,6 +411,7 @@ a {
   font-size: 24px;
   white-space: nowrap;
   opacity: 0;
+  pointer-events: none;
   animation: speech-bubble-anim 0.5s ease 1;
   animation-fill-mode: forwards;
   animation-delay: 1000ms;
