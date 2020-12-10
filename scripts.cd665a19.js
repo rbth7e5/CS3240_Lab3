@@ -4466,7 +4466,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.navAnimator = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = exports.sg_geojson = void 0;
+exports.navAnimator = exports.navListAnime = exports.navListAnimeRestore = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = exports.sg_geojson = void 0;
 
 var _animejs = _interopRequireDefault(require("animejs"));
 
@@ -4556,10 +4556,16 @@ var dragElement = function dragElement(elmnt) {
 
 exports.dragElement = dragElement;
 var avatar = document.getElementById("avatar");
+var avatarOrigTopOffset = window.innerHeight / 2 - 64;
+var avatarOrigLeftOffset = window.innerWidth / 4 - 64;
+var avatarNewTopOffset = 64;
+var avatarNewLeftOffset = 128;
+var avatarCurrentTopOffset = avatar.offsetTop;
+var avatarCurrentLeftOffset = avatar.offsetLeft;
 var navAnimeRestore = (0, _animejs.default)({
   targets: "#navbar",
-  translateX: [-avatar.offsetLeft - 128, 0],
-  translateY: [256, 0],
+  top: [avatarCurrentTopOffset, 0],
+  left: [-avatarCurrentLeftOffset, 0],
   width: [0, "100%"],
   height: [0, 56],
   opacity: 1,
@@ -4571,8 +4577,8 @@ var navAnimeRestore = (0, _animejs.default)({
 exports.navAnimeRestore = navAnimeRestore;
 var navAnime = (0, _animejs.default)({
   targets: "#navbar",
-  translateX: [0, -avatar.offsetLeft - 128],
-  translateY: [0, 256],
+  top: [0, avatarNewTopOffset],
+  left: [0, -avatarNewLeftOffset],
   width: ["100%", 0],
   height: [56, 0],
   opacity: 0,
@@ -4583,68 +4589,67 @@ var navAnime = (0, _animejs.default)({
 exports.navAnime = navAnime;
 var avatarAnimeRestore = (0, _animejs.default)({
   targets: "#avatar",
-  translateX: [-160, 0],
-  translateY: [-320, 0],
+  top: [avatarCurrentTopOffset, avatarOrigTopOffset],
+  left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
   easing: "easeOutElastic(1, 1)",
-  duration: 500
+  duration: 500,
+  delay: 500
 });
 var avatarAnime = (0, _animejs.default)({
   targets: "#avatar",
-  translateX: [0, -160],
-  translateY: [0, -320],
+  top: [avatarCurrentTopOffset, avatarNewTopOffset],
+  left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
   easing: "easeOutElastic(1, 1)",
   duration: 500
 });
 var navListAnimeRestore = (0, _animejs.default)({
   targets: ".nav-list .list-icon",
-  translateX: [0, 100],
+  translateX: function translateX(el, i) {
+    return [-88 * Math.sin((2.5 + 25 * i) / 180 * Math.PI), 0];
+  },
+  translateY: function translateY(el, i) {
+    return [-88 * Math.cos((2.5 + 25 * i) / 180 * Math.PI), 0];
+  },
   opacity: [1, 0],
   delay: _animejs.default.stagger(30),
   duration: 250,
-  autoplay: false
+  autoplay: false,
+  zIndex: [998, -1]
 });
+exports.navListAnimeRestore = navListAnimeRestore;
 var navListAnime = (0, _animejs.default)({
   targets: ".nav-list .list-icon",
-  translateX: [100, 0],
+  translateX: function translateX(el, i) {
+    return [0, -88 * Math.sin((2.5 + 25 * i) / 180 * Math.PI)];
+  },
+  translateY: function translateY(el, i) {
+    return [0, -88 * Math.cos((2.5 + 25 * i) / 180 * Math.PI)];
+  },
   opacity: [0, 1],
-  delay: _animejs.default.stagger(100),
-  duration: 500,
-  autoplay: false
+  delay: _animejs.default.stagger(30),
+  duration: 250,
+  autoplay: false,
+  zIndex: [-1, 998]
 });
+exports.navListAnime = navListAnime;
+var navToggle = false;
 
 var navAnimator = function navAnimator() {
   var scrollY = document.getElementById("scroll-container").scrollTop;
   var nav = document.getElementById("navbar");
 
-  if (scrollY !== 0 && nav.style.transform === "translateX(0px) translateY(0px)") {
+  if (scrollY > window.innerHeight / 2 && nav.offsetTop === 0 && !navToggle) {
     navAnime.play();
     avatarAnime.play();
     navListAnime.play();
-    /*
-    let pos = 0;
-    let width = nav.offsetWidth;
-    let left = 0;
-    const initWidth = nav.offsetWidth;
-    const initTop = avatar.offsetTop;
-    console.log(avatar.offsetLeft);
-    let timer = setInterval(() => {
-      pos++;
-      width -= initWidth/initTop;
-      left += avatar.offsetLeft/initTop;
-      nav.style.top = pos + 'px';
-      nav.style.width = width + 'px';
-      nav.style.left = left + 'px';
-      if (pos === avatar.offsetTop) {
-        nav.style.display = 'none';
-        clearInterval(timer);
-      }
-    }, 0.25);*/
-  } else if (scrollY === 0) {
+    navToggle = true; // Fix animation playing twice when user over scrolls and it bounces back.
+  } else if (scrollY < window.innerHeight / 2 && nav.offsetTop !== 0 && navToggle) {
     navListAnimeRestore.play();
     navAnimeRestore.play();
     avatarAnimeRestore.play();
+    navToggle = false;
   }
 };
 
@@ -4682,7 +4687,10 @@ window.downloadResume = function () {
 document.getElementById("resume-icon").onclick = downloadResume; // Add an event listener listening for scroll
 
 document.getElementById("scroll-container").addEventListener("scroll", _consts.navHighlighter);
-document.getElementById("scroll-container").addEventListener("scroll", _consts.navAnimator);
+document.getElementById("scroll-container").addEventListener("scroll", _consts.navAnimator, {
+  capture: true,
+  passive: true
+});
 (0, _consts.dragElement)(document.getElementById("avatar"));
 },{"@turf/boolean-contains":"node_modules/@turf/boolean-contains/index.js","@turf/helpers":"node_modules/@turf/helpers/index.js","./consts":"js/consts.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -4712,7 +4720,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53633" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52937" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
