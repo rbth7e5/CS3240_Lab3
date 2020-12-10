@@ -61,7 +61,7 @@ body {
   flex-grow: 1;
   max-width: 512px;
   margin: auto;
-  text-align: center;
+  text-align: left;
 }
 
 .intro-content {
@@ -394,7 +394,7 @@ a {
 
 .speech-bubble {
   position: absolute;
-  left: 180px;
+  left: 160px;
   top: -16px;
   background: white;
   color: black;
