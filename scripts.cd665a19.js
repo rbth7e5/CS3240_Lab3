@@ -4573,7 +4573,7 @@ var avatar = document.getElementById("avatar");
 var avatarOrigTopOffset = window.innerHeight / 2 - 64;
 var avatarOrigLeftOffset = window.innerWidth / 4 - 64;
 var avatarNewTopOffset = 64;
-var avatarNewLeftOffset = 128;
+var avatarNewLeftOffset = 64;
 var avatarCurrentTopOffset = avatar.offsetTop;
 var avatarCurrentLeftOffset = avatar.offsetLeft;
 var navAnimeRestore = (0, _animejs.default)({
@@ -4585,7 +4585,6 @@ var navAnimeRestore = (0, _animejs.default)({
   opacity: 1,
   autoplay: false,
   easing: "easeOutExpo",
-  duration: 250,
   delay: 250
 });
 exports.navAnimeRestore = navAnimeRestore;
@@ -4597,19 +4596,17 @@ var navAnime = (0, _animejs.default)({
   height: [56, 0],
   opacity: 0,
   autoplay: false,
-  easing: "easeOutExpo",
-  duration: 250
+  easing: "easeOutExpo"
 });
 exports.navAnime = navAnime;
 var avatarAnimeRestore = (0, _animejs.default)({
   targets: "#avatar",
-  top: [avatarCurrentTopOffset, avatarOrigTopOffset],
-  left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
+  top: [avatarNewTopOffset, avatarOrigTopOffset],
+  left: [avatarNewLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
   opacity: 1,
   easing: "easeOutElastic(1, 1)",
-  duration: 500,
-  delay: 500
+  delay: 250
 });
 var avatarAnime = (0, _animejs.default)({
   targets: "#avatar",
@@ -4617,8 +4614,7 @@ var avatarAnime = (0, _animejs.default)({
   left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
   opacity: 0.75,
-  easing: "easeOutElastic(1, 1)",
-  duration: 500
+  easing: "easeOutElastic(1, 1)"
 });
 var navListAnimeRestore = (0, _animejs.default)({
   targets: ".nav-list .list-icon",
@@ -4630,7 +4626,6 @@ var navListAnimeRestore = (0, _animejs.default)({
   },
   opacity: [1, 0],
   delay: _animejs.default.stagger(30),
-  duration: 250,
   autoplay: false,
   zIndex: [998, -1]
 });
@@ -4645,7 +4640,6 @@ var navListAnime = (0, _animejs.default)({
   },
   opacity: [0, 1],
   delay: _animejs.default.stagger(30),
-  duration: 250,
   autoplay: false,
   zIndex: [-1, 998]
 });
@@ -4770,7 +4764,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63612" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54730" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
