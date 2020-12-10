@@ -145,7 +145,6 @@ export const navAnimeRestore = anime({
   opacity: 1,
   autoplay: false,
   easing: "easeOutExpo",
-  delay: 250,
 });
 export const navAnime = anime({
   targets: "#navbar",
@@ -162,16 +161,15 @@ let avatarAnimeRestore = anime({
   top: [avatarNewTopOffset, avatarOrigTopOffset],
   left: [avatarNewLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
-  opacity: 1,
+  opacity: [0.75, 1],
   easing: "easeOutElastic(1, 1)",
-  delay: 250,
 });
 const avatarAnime = anime({
   targets: "#avatar",
   top: [avatarCurrentTopOffset, avatarNewTopOffset],
   left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
-  opacity: 0.75,
+  opacity: [1, 0.75],
   easing: "easeOutElastic(1, 1)",
 });
 export const navListAnimeRestore = anime({
@@ -202,12 +200,12 @@ export const navListAnime = anime({
 });
 const introTextAnimeRestore = anime({
   targets: "#intro-text",
-  opacity: 1,
+  opacity: [0, 1],
   autoplay: false,
 });
 const introTextAnime = anime({
   targets: "#intro-text",
-  opacity: 0,
+  opacity: [1, 0],
   autoplay: false,
 });
 let navToggle = false;
@@ -222,10 +220,10 @@ export const navAnimator = () => {
     navToggle = true;
     // Fix animation playing twice when user over scrolls and it bounces back.
   } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
-    navListAnimeRestore.play();
-    navAnimeRestore.play();
-    avatarAnimeRestore.play();
     introTextAnimeRestore.play();
+    navListAnimeRestore.play();
+    avatarAnimeRestore.play();
+    navAnimeRestore.play();
     navToggle = false;
   }
 };
@@ -236,13 +234,11 @@ export const resizeListener = () => {
   avatarCurrentLeftOffset = window.innerWidth / 4 - 64;
   avatarAnimeRestore = anime({
     targets: "#avatar",
-    top: [avatarCurrentTopOffset, avatarOrigTopOffset],
-    left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
+    top: [avatarNewTopOffset, avatarOrigTopOffset],
+    left: [avatarNewLeftOffset, avatarOrigLeftOffset],
     autoplay: false,
     opacity: 1,
     easing: "easeOutElastic(1, 1)",
-    duration: 500,
-    delay: 500,
   });
   document.getElementById("avatar").style.top = avatarCurrentTopOffset + "px";
   document.getElementById("avatar").style.left = avatarCurrentLeftOffset + "px";
