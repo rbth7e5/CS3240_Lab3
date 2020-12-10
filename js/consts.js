@@ -134,7 +134,7 @@ export const navAnimeRestore = anime({
   opacity: 1,
   autoplay: false,
   easing: "easeOutExpo",
-  duration: 500,
+  duration: 250,
   delay: 250,
 });
 export const navAnime = anime({
@@ -146,13 +146,14 @@ export const navAnime = anime({
   opacity: 0,
   autoplay: false,
   easing: "easeOutExpo",
-  duration: 500,
+  duration: 250,
 });
 const avatarAnimeRestore = anime({
   targets: "#avatar",
   top: [avatarCurrentTopOffset, avatarOrigTopOffset],
   left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
+  opacity: 1,
   easing: "easeOutElastic(1, 1)",
   duration: 500,
   delay: 500,
@@ -162,6 +163,7 @@ const avatarAnime = anime({
   top: [avatarCurrentTopOffset, avatarNewTopOffset],
   left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
+  opacity: 0.5,
   easing: "easeOutElastic(1, 1)",
   duration: 500,
 });
@@ -197,17 +199,13 @@ let navToggle = false;
 export const navAnimator = () => {
   let scrollY = document.getElementById("scroll-container").scrollTop;
   const nav = document.getElementById("navbar");
-  if (scrollY > window.innerHeight / 2 && nav.offsetTop === 0 && !navToggle) {
+  if (scrollY > 0 && nav.offsetTop === 0 && !navToggle) {
     navAnime.play();
     avatarAnime.play();
     navListAnime.play();
     navToggle = true;
     // Fix animation playing twice when user over scrolls and it bounces back.
-  } else if (
-    scrollY < window.innerHeight / 2 &&
-    nav.offsetTop !== 0 &&
-    navToggle
-  ) {
+  } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
     navListAnimeRestore.play();
     navAnimeRestore.play();
     avatarAnimeRestore.play();
