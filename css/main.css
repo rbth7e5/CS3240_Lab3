@@ -304,8 +304,9 @@ a {
 .card {
   flex: 1;
   background-color: transparent;
+  /*
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);*/
   border: none;
   border-radius: 8px;
 }
@@ -347,8 +348,8 @@ a {
 .timeline-point-desc {
   flex: 1;
   margin: 32px 0;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /*backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);*/
   padding: 16px;
   border-radius: 8px;
 }
