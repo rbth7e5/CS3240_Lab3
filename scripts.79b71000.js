@@ -2523,7 +2523,7 @@ parcelRequire = (function (e, r, t, n) {
       function (require, module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", { value: !0 }),
-          (exports.mouseDownHandler = exports.mouseUpHandler = exports.navListAnimator = exports.navAnimator = exports.navListAnime = exports.navListAnimeRestore = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = exports.sg_geojson = void 0);
+          (exports.navAnimator = exports.navListAnime = exports.navListAnimeRestore = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = exports.sg_geojson = void 0);
         var e = t(require("animejs"));
         function t(e) {
           return e && e.__esModule ? e : { default: e };
@@ -2576,44 +2576,44 @@ parcelRequire = (function (e, r, t, n) {
           ],
         };
         exports.sg_geojson = a;
-        var o = document.querySelectorAll("section[id]"),
-          n = function () {
+        var n = document.querySelectorAll("section[id]"),
+          o = function () {
             var e = document.getElementById("scroll-container").scrollTop;
-            o.forEach(function (t) {
+            n.forEach(function (t) {
               var a = t.offsetHeight,
-                o = t.offsetTop - 50,
-                n = t.getAttribute("id"),
-                r = document.querySelector(".nav a[href*=" + n + "]").classList,
-                s = document.querySelector(".nav-list a[href*=" + n + "]")
+                n = t.offsetTop - 50,
+                o = t.getAttribute("id"),
+                r = document.querySelector(".nav a[href*=" + o + "]").classList,
+                i = document.querySelector(".nav-list a[href*=" + o + "]")
                   .classList;
-              e > o && e <= o + a
-                ? (r.add("active-light"), s.add("active-light"))
-                : (r.remove("active-light"), s.remove("active-light"));
+              e > n && e <= n + a
+                ? (r.add("active-light"), i.add("active-light"))
+                : (r.remove("active-light"), i.remove("active-light"));
             });
           };
-        exports.navHighlighter = n;
+        exports.navHighlighter = o;
         var r = function (e) {
           var t = 0,
             a = 0,
-            o = 0,
-            n = 0;
+            n = 0,
+            o = 0;
           function r(e) {
             (e = e || window.event).preventDefault(),
-              (o = e.clientX),
-              (n = e.clientY),
-              (document.onmouseup = i),
-              (document.onmousemove = s);
+              (n = e.clientX),
+              (o = e.clientY),
+              (document.onmouseup = s),
+              (document.onmousemove = i);
           }
-          function s(r) {
+          function i(r) {
             (r = r || window.event).preventDefault(),
-              (t = o - r.clientX),
-              (a = n - r.clientY),
-              (o = r.clientX),
-              (n = r.clientY),
+              (t = n - r.clientX),
+              (a = o - r.clientY),
+              (n = r.clientX),
+              (o = r.clientY),
               (e.style.top = e.offsetTop - a + "px"),
               (e.style.left = e.offsetLeft - t + "px");
           }
-          function i() {
+          function s() {
             (document.onmouseup = null), (document.onmousemove = null);
           }
           document.getElementById(e.id + "header")
@@ -2621,11 +2621,17 @@ parcelRequire = (function (e, r, t, n) {
             : (e.onmousedown = r);
         };
         exports.dragElement = r;
-        var s = document.getElementById("avatar"),
-          i = (0, e.default)({
+        var i = document.getElementById("avatar"),
+          s = window.innerHeight / 2 - 64,
+          l = window.innerWidth / 4 - 64,
+          u = 64,
+          d = 128,
+          c = i.offsetTop,
+          p = i.offsetLeft,
+          f = (0, e.default)({
             targets: "#navbar",
-            translateX: [-s.offsetLeft - 128, 0],
-            translateY: [256, 0],
+            top: [c, 0],
+            left: [-p, 0],
             width: [0, "100%"],
             height: [0, 56],
             opacity: 1,
@@ -2634,11 +2640,11 @@ parcelRequire = (function (e, r, t, n) {
             duration: 500,
             delay: 250,
           });
-        exports.navAnimeRestore = i;
-        var l = (0, e.default)({
+        exports.navAnimeRestore = f;
+        var v = (0, e.default)({
           targets: "#navbar",
-          translateX: [0, -s.offsetLeft - 128],
-          translateY: [0, 256],
+          top: [0, u],
+          left: [0, -d],
           width: ["100%", 0],
           height: [56, 0],
           opacity: 0,
@@ -2646,100 +2652,85 @@ parcelRequire = (function (e, r, t, n) {
           easing: "easeOutExpo",
           duration: 500,
         });
-        exports.navAnime = l;
-        var u = window.innerHeight / 2 - 64,
-          p = window.innerWidth / 4 - 64,
-          d = 64,
-          c = 128,
-          m = s.offsetTop,
-          v = s.offsetLeft,
-          f = (0, e.default)({
+        exports.navAnime = v;
+        var g = (0, e.default)({
             targets: "#avatar",
-            top: [m, u],
-            left: [v, p],
+            top: [c, s],
+            left: [p, l],
             autoplay: !1,
             easing: "easeOutElastic(1, 1)",
             duration: 500,
+            delay: 500,
           }),
-          g = (0, e.default)({
+          m = (0, e.default)({
             targets: "#avatar",
-            top: [m, d],
-            left: [v, c],
+            top: [c, u],
+            left: [p, d],
             autoplay: !1,
+            opacity: 0.7,
             easing: "easeOutElastic(1, 1)",
             duration: 500,
           }),
           y = (0, e.default)({
             targets: ".nav-list .list-icon",
-            translateX: [0, 100],
+            translateX: function (e, t) {
+              return [-88 * Math.sin(((2.5 + 25 * t) / 180) * Math.PI), 0];
+            },
+            translateY: function (e, t) {
+              return [-88 * Math.cos(((2.5 + 25 * t) / 180) * Math.PI), 0];
+            },
             opacity: [1, 0],
             delay: e.default.stagger(30),
             duration: 250,
             autoplay: !1,
-            zIndex: [9999, -1],
+            zIndex: [998, -1],
           });
         exports.navListAnimeRestore = y;
-        var x = !1,
-          h = (0, e.default)({
-            targets: ".nav-list .list-icon",
-            translateX: [100, 0],
-            opacity: [0, 1],
-            delay: e.default.stagger(100),
-            duration: 500,
-            autoplay: !1,
-            zIndex: [-1, 9999],
-          });
+        var h = (0, e.default)({
+          targets: ".nav-list .list-icon",
+          translateX: function (e, t) {
+            return [0, -88 * Math.sin(((2.5 + 25 * t) / 180) * Math.PI)];
+          },
+          translateY: function (e, t) {
+            return [0, -88 * Math.cos(((2.5 + 25 * t) / 180) * Math.PI)];
+          },
+          opacity: [0, 1],
+          delay: e.default.stagger(30),
+          duration: 250,
+          autoplay: !1,
+          zIndex: [-1, 998],
+        });
         exports.navListAnime = h;
-        var w = function () {
-          var e = document.getElementById("scroll-container").scrollTop,
-            t = document.getElementById("navbar");
-          0 !== e && "translateX(0px) translateY(0px)" === t.style.transform
-            ? (l.play(), g.play(), h.play(), (x = !0))
-            : 0 === e &&
-              0 !==
-                Math.abs(
-                  Math.round(
-                    parseInt(
-                      window
-                        .getComputedStyle(t)
-                        .transform.match(/matrix.*\((.+)\)/)[1]
-                        .split(", ")[4]
-                    )
-                  )
-                ) &&
-              (y.play(), (x = !1), i.play(), f.play());
-        };
+        var x = !1,
+          w = function () {
+            var e = document.getElementById("scroll-container").scrollTop,
+              t = document.getElementById("navbar");
+            e > window.innerHeight / 2 && 0 === t.offsetTop && !x
+              ? (v.play(), m.play(), h.play(), (x = !0))
+              : e < window.innerHeight / 2 &&
+                0 !== t.offsetTop &&
+                x &&
+                (y.play(), f.play(), g.play(), (x = !1));
+          };
         exports.navAnimator = w;
-        var A = function (e) {
-          e.stopPropagation(), x ? (y.play(), (x = !1)) : (h.play(), (x = !0));
-        };
-        exports.navListAnimator = A;
-        var E = function () {
-          x || (h.play(), (x = !0));
-        };
-        exports.mouseUpHandler = E;
-        var L = function () {
-          x && (y.play(), (x = !1));
-        };
-        exports.mouseDownHandler = L;
       },
       { animejs: "tMTn" },
     ],
     VJtr: [
       function (require, module, exports) {
         "use strict";
-        var e = o(require("@turf/boolean-contains")),
-          n = require("@turf/helpers"),
+        var e = n(require("@turf/boolean-contains")),
+          o = require("@turf/helpers"),
           t = require("./consts");
-        function o(e) {
+        function n(e) {
           return e && e.__esModule ? e : { default: e };
         }
         (window.downloadResume = function () {
           navigator.geolocation
             ? navigator.geolocation.getCurrentPosition(
-                function (o) {
-                  var d = (0, n.point)([o.coords.longitude, o.coords.latitude]),
-                    l = (0, n.polygon)(
+                function (n) {
+                  var d = (0, o.point)([n.coords.longitude, n.coords.latitude]),
+                    l = (0, o.polygon)(
                       t.sg_geojson.features[0].geometry.coordinates
                     );
                   (0, e.default)(l, d)
@@ -2758,14 +2749,11 @@ parcelRequire = (function (e, r, t, n) {
             .addEventListener("scroll", t.navHighlighter),
           document
             .getElementById("scroll-container")
-            .addEventListener("scroll", t.navAnimator),
-          (0, t.dragElement)(document.getElementById("avatar")),
-          document
-            .getElementById("avatar")
-            .addEventListener("mouseup", t.mouseUpHandler),
-          document
-            .getElementById("avatar")
-            .addEventListener("mousedown", t.mouseDownHandler);
+            .addEventListener("scroll", t.navAnimator, {
+              capture: !0,
+              passive: !0,
+            }),
+          (0, t.dragElement)(document.getElementById("avatar"));
       },
       {
         "@turf/boolean-contains": "jWcY",
@@ -2778,4 +2766,4 @@ parcelRequire = (function (e, r, t, n) {
   ["VJtr"],
   null
 );
-//# sourceMappingURL=/scripts.0bc10c93.js.map
+//# sourceMappingURL=/scripts.79b71000.js.map

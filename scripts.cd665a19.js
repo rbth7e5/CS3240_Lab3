@@ -4571,7 +4571,7 @@ var navAnimeRestore = (0, _animejs.default)({
   opacity: 1,
   autoplay: false,
   easing: "easeOutExpo",
-  duration: 500,
+  duration: 250,
   delay: 250
 });
 exports.navAnimeRestore = navAnimeRestore;
@@ -4584,7 +4584,7 @@ var navAnime = (0, _animejs.default)({
   opacity: 0,
   autoplay: false,
   easing: "easeOutExpo",
-  duration: 500
+  duration: 250
 });
 exports.navAnime = navAnime;
 var avatarAnimeRestore = (0, _animejs.default)({
@@ -4592,6 +4592,7 @@ var avatarAnimeRestore = (0, _animejs.default)({
   top: [avatarCurrentTopOffset, avatarOrigTopOffset],
   left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
+  opacity: 1,
   easing: "easeOutElastic(1, 1)",
   duration: 500,
   delay: 500
@@ -4601,6 +4602,7 @@ var avatarAnime = (0, _animejs.default)({
   top: [avatarCurrentTopOffset, avatarNewTopOffset],
   left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
+  opacity: 0.5,
   easing: "easeOutElastic(1, 1)",
   duration: 500
 });
@@ -4640,12 +4642,12 @@ var navAnimator = function navAnimator() {
   var scrollY = document.getElementById("scroll-container").scrollTop;
   var nav = document.getElementById("navbar");
 
-  if (scrollY > window.innerHeight / 2 && nav.offsetTop === 0 && !navToggle) {
+  if (scrollY > 0 && nav.offsetTop === 0 && !navToggle) {
     navAnime.play();
     avatarAnime.play();
     navListAnime.play();
     navToggle = true; // Fix animation playing twice when user over scrolls and it bounces back.
-  } else if (scrollY < window.innerHeight / 2 && nav.offsetTop !== 0 && navToggle) {
+  } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
     navListAnimeRestore.play();
     navAnimeRestore.play();
     avatarAnimeRestore.play();
@@ -4720,7 +4722,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52937" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58579" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

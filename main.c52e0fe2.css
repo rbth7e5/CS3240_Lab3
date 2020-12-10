@@ -386,5 +386,9 @@ a {
   border-radius: 8px;
 }
 
+#avatar:hover {
+  opacity: 1 !important;
+}
+
 
 /*# sourceMappingURL=/main.c52e0fe2.css.map */
