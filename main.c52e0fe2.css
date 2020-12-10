@@ -54,6 +54,7 @@ body {
 }
 
 .intro {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,11 +68,12 @@ body {
 .intro-content {
   pointer-events: none;
   position: absolute;
-  top: 50vh;
-  left: calc(25% + 96px);
+  top: 64px;
+  left: calc(25% + 128px);
   border-radius: 8px;
   z-index: 998;
-  max-width: 50vw;
+  width: 50vw;
+  color: white;
   opacity: 0;
   animation: speech-bubble-anim 0.5s ease 1;
   animation-fill-mode: forwards;

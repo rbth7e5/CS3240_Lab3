@@ -4466,7 +4466,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.navAnimator = exports.navListAnime = exports.navListAnimeRestore = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = exports.sg_geojson = void 0;
+exports.resizeListener = exports.navAnimator = exports.navListAnime = exports.navListAnimeRestore = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = exports.sg_geojson = void 0;
 
 var _animejs = _interopRequireDefault(require("animejs"));
 
@@ -4682,6 +4682,27 @@ var navAnimator = function navAnimator() {
 };
 
 exports.navAnimator = navAnimator;
+
+var resizeListener = function resizeListener() {
+  avatarOrigTopOffset = window.innerHeight / 2 - 64;
+  avatarOrigLeftOffset = window.innerWidth / 4 - 64;
+  avatarCurrentTopOffset = window.innerHeight / 2 - 64;
+  avatarCurrentLeftOffset = window.innerWidth / 4 - 64;
+  avatarAnimeRestore = (0, _animejs.default)({
+    targets: "#avatar",
+    top: [avatarCurrentTopOffset, avatarOrigTopOffset],
+    left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
+    autoplay: false,
+    opacity: 1,
+    easing: "easeOutElastic(1, 1)",
+    duration: 500,
+    delay: 500
+  });
+  document.getElementById("avatar").style.top = avatarCurrentTopOffset + "px";
+  document.getElementById("avatar").style.left = avatarCurrentLeftOffset + "px";
+};
+
+exports.resizeListener = resizeListener;
 },{"animejs":"node_modules/animejs/lib/anime.es.js"}],"js/scripts.js":[function(require,module,exports) {
 "use strict";
 
@@ -4720,6 +4741,7 @@ document.getElementById("scroll-container").addEventListener("scroll", _consts.n
   passive: true
 });
 (0, _consts.dragElement)(document.getElementById("avatar"));
+window.addEventListener("resize", _consts.resizeListener);
 },{"@turf/boolean-contains":"node_modules/@turf/boolean-contains/index.js","@turf/helpers":"node_modules/@turf/helpers/index.js","./consts":"js/consts.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4748,7 +4770,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57231" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63612" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
