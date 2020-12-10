@@ -78,6 +78,7 @@ body {
 }
 
 #navbar {
+  position: absolute;
   top: 0;
   overflow: hidden;
 }
@@ -86,7 +87,25 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: -32px;
+  z-index: 998;
+}
+
+.list-icon i {
+  font-size: 16px;
+}
+.list-icon {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: -13px;
+  left: -13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: gray;
+  box-shadow: 0 0 4px 1px black;
+  z-index: 998;
 }
 
 .nav,
@@ -155,6 +174,12 @@ a {
   background-color: white;
   color: #6c757d;
   border-radius: 4px;
+}
+
+.nav-list a:hover,
+.nav-list i:hover,
+.nav-list .active-light {
+  border-radius: 50%;
 }
 
 .light-nav:hover,

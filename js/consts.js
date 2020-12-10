@@ -119,10 +119,16 @@ export const dragElement = (elmnt) => {
 };
 
 const avatar = document.getElementById("avatar");
+const avatarOrigTopOffset = window.innerHeight / 2 - 64;
+const avatarOrigLeftOffset = window.innerWidth / 4 - 64;
+const avatarNewTopOffset = 64;
+const avatarNewLeftOffset = 128;
+const avatarCurrentTopOffset = avatar.offsetTop;
+const avatarCurrentLeftOffset = avatar.offsetLeft;
 export const navAnimeRestore = anime({
   targets: "#navbar",
-  translateX: [-avatar.offsetLeft - 128, 0],
-  translateY: [256, 0],
+  top: [avatarCurrentTopOffset, 0],
+  left: [-avatarCurrentLeftOffset, 0],
   width: [0, "100%"],
   height: [0, 56],
   opacity: 1,
@@ -133,8 +139,8 @@ export const navAnimeRestore = anime({
 });
 export const navAnime = anime({
   targets: "#navbar",
-  translateX: [0, -avatar.offsetLeft - 128],
-  translateY: [0, 256],
+  top: [0, avatarNewTopOffset],
+  left: [0, -avatarNewLeftOffset],
   width: ["100%", 0],
   height: [56, 0],
   opacity: 0,
@@ -142,13 +148,6 @@ export const navAnime = anime({
   easing: "easeOutExpo",
   duration: 500,
 });
-
-const avatarOrigTopOffset = window.innerHeight / 2 - 64;
-const avatarOrigLeftOffset = window.innerWidth / 4 - 64;
-const avatarNewTopOffset = 64;
-const avatarNewLeftOffset = 128;
-const avatarCurrentTopOffset = avatar.offsetTop;
-const avatarCurrentLeftOffset = avatar.offsetLeft;
 const avatarAnimeRestore = anime({
   targets: "#avatar",
   top: [avatarCurrentTopOffset, avatarOrigTopOffset],
@@ -156,6 +155,7 @@ const avatarAnimeRestore = anime({
   autoplay: false,
   easing: "easeOutElastic(1, 1)",
   duration: 500,
+  delay: 500,
 });
 const avatarAnime = anime({
   targets: "#avatar",
@@ -167,76 +167,50 @@ const avatarAnime = anime({
 });
 export const navListAnimeRestore = anime({
   targets: ".nav-list .list-icon",
-  translateX: [0, 100],
+  translateX: function (el, i) {
+    return [-88 * Math.sin(((2.5 + 25 * i) / 180) * Math.PI), 0];
+  },
+  translateY: function (el, i) {
+    return [-88 * Math.cos(((2.5 + 25 * i) / 180) * Math.PI), 0];
+  },
   opacity: [1, 0],
   delay: anime.stagger(30),
   duration: 250,
   autoplay: false,
-  zIndex: [9999, -1],
+  zIndex: [998, -1],
 });
-let navListOpen = false;
 export const navListAnime = anime({
   targets: ".nav-list .list-icon",
-  translateX: [100, 0],
+  translateX: function (el, i) {
+    return [0, -88 * Math.sin(((2.5 + 25 * i) / 180) * Math.PI)];
+  },
+  translateY: function (el, i) {
+    return [0, -88 * Math.cos(((2.5 + 25 * i) / 180) * Math.PI)];
+  },
   opacity: [0, 1],
-  delay: anime.stagger(100),
-  duration: 500,
+  delay: anime.stagger(30),
+  duration: 250,
   autoplay: false,
-  zIndex: [-1, 9999],
+  zIndex: [-1, 998],
 });
+let navToggle = false;
 export const navAnimator = () => {
   let scrollY = document.getElementById("scroll-container").scrollTop;
   const nav = document.getElementById("navbar");
-  if (
-    scrollY !== 0 &&
-    nav.style.transform === "translateX(0px) translateY(0px)"
-  ) {
+  if (scrollY > window.innerHeight / 2 && nav.offsetTop === 0 && !navToggle) {
     navAnime.play();
     avatarAnime.play();
     navListAnime.play();
-    navListOpen = true;
+    navToggle = true;
     // Fix animation playing twice when user over scrolls and it bounces back.
   } else if (
-    scrollY === 0 &&
-    Math.abs(
-      Math.round(
-        parseInt(
-          window
-            .getComputedStyle(nav)
-            .transform.match(/matrix.*\((.+)\)/)[1]
-            .split(", ")[4]
-        )
-      )
-    ) !== 0
+    scrollY < window.innerHeight / 2 &&
+    nav.offsetTop !== 0 &&
+    navToggle
   ) {
     navListAnimeRestore.play();
-    navListOpen = false;
     navAnimeRestore.play();
     avatarAnimeRestore.play();
-  }
-};
-
-export const navListAnimator = (event) => {
-  event.stopPropagation();
-  if (navListOpen) {
-    navListAnimeRestore.play();
-    navListOpen = false;
-  } else {
-    navListAnime.play();
-    navListOpen = true;
-  }
-};
-
-export const mouseUpHandler = () => {
-  if (!navListOpen) {
-    navListAnime.play();
-    navListOpen = true;
-  }
-};
-
-export const mouseDownHandler = () => {
-  if (navListOpen) {
-    navListAnimeRestore.play();
-    navListOpen = false;
+    navToggle = false;
   }
 };
