@@ -157,17 +157,15 @@ export const navAnime = anime({
   opacity: 0,
   autoplay: false,
   easing: "easeOutExpo",
-  duration: 250,
 });
 let avatarAnimeRestore = anime({
   targets: "#avatar",
-  top: [avatarCurrentTopOffset, avatarOrigTopOffset],
-  left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
+  top: [avatarNewTopOffset, avatarOrigTopOffset],
+  left: [avatarNewLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
   opacity: 1,
   easing: "easeOutElastic(1, 1)",
-  duration: 500,
-  delay: 500,
+  delay: 250,
 });
 const avatarAnime = anime({
   targets: "#avatar",
@@ -176,7 +174,6 @@ const avatarAnime = anime({
   autoplay: false,
   opacity: 0.75,
   easing: "easeOutElastic(1, 1)",
-  duration: 500,
 });
 export const navListAnimeRestore = anime({
   targets: ".nav-list .list-icon",
@@ -188,7 +185,6 @@ export const navListAnimeRestore = anime({
   },
   opacity: [1, 0],
   delay: anime.stagger(30),
-  duration: 250,
   autoplay: false,
   zIndex: [998, -1],
 });
@@ -202,7 +198,6 @@ export const navListAnime = anime({
   },
   opacity: [0, 1],
   delay: anime.stagger(30),
-  duration: 250,
   autoplay: false,
   zIndex: [-1, 998],
 });
