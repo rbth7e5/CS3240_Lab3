@@ -1,4 +1,4 @@
-# CS3240_Lab3
+# My Personal Portfolio
 
 ## Running locally
 
