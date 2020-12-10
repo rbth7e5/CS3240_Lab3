@@ -4584,8 +4584,7 @@ var navAnimeRestore = (0, _animejs.default)({
   height: [0, 56],
   opacity: 1,
   autoplay: false,
-  easing: "easeOutExpo",
-  delay: 250
+  easing: "easeOutExpo"
 });
 exports.navAnimeRestore = navAnimeRestore;
 var navAnime = (0, _animejs.default)({
@@ -4604,16 +4603,15 @@ var avatarAnimeRestore = (0, _animejs.default)({
   top: [avatarNewTopOffset, avatarOrigTopOffset],
   left: [avatarNewLeftOffset, avatarOrigLeftOffset],
   autoplay: false,
-  opacity: 1,
-  easing: "easeOutElastic(1, 1)",
-  delay: 250
+  opacity: [0.75, 1],
+  easing: "easeOutElastic(1, 1)"
 });
 var avatarAnime = (0, _animejs.default)({
   targets: "#avatar",
   top: [avatarCurrentTopOffset, avatarNewTopOffset],
   left: [avatarCurrentLeftOffset, avatarNewLeftOffset],
   autoplay: false,
-  opacity: 0.75,
+  opacity: [1, 0.75],
   easing: "easeOutElastic(1, 1)"
 });
 var navListAnimeRestore = (0, _animejs.default)({
@@ -4646,12 +4644,12 @@ var navListAnime = (0, _animejs.default)({
 exports.navListAnime = navListAnime;
 var introTextAnimeRestore = (0, _animejs.default)({
   targets: "#intro-text",
-  opacity: 1,
+  opacity: [0, 1],
   autoplay: false
 });
 var introTextAnime = (0, _animejs.default)({
   targets: "#intro-text",
-  opacity: 0,
+  opacity: [1, 0],
   autoplay: false
 });
 var navToggle = false;
@@ -4667,10 +4665,10 @@ var navAnimator = function navAnimator() {
     introTextAnime.play();
     navToggle = true; // Fix animation playing twice when user over scrolls and it bounces back.
   } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
-    navListAnimeRestore.play();
-    navAnimeRestore.play();
-    avatarAnimeRestore.play();
     introTextAnimeRestore.play();
+    navListAnimeRestore.play();
+    avatarAnimeRestore.play();
+    navAnimeRestore.play();
     navToggle = false;
   }
 };
@@ -4684,13 +4682,11 @@ var resizeListener = function resizeListener() {
   avatarCurrentLeftOffset = window.innerWidth / 4 - 64;
   avatarAnimeRestore = (0, _animejs.default)({
     targets: "#avatar",
-    top: [avatarCurrentTopOffset, avatarOrigTopOffset],
-    left: [avatarCurrentLeftOffset, avatarOrigLeftOffset],
+    top: [avatarNewTopOffset, avatarOrigTopOffset],
+    left: [avatarNewLeftOffset, avatarOrigLeftOffset],
     autoplay: false,
     opacity: 1,
-    easing: "easeOutElastic(1, 1)",
-    duration: 500,
-    delay: 500
+    easing: "easeOutElastic(1, 1)"
   });
   document.getElementById("avatar").style.top = avatarCurrentTopOffset + "px";
   document.getElementById("avatar").style.left = avatarCurrentLeftOffset + "px";
