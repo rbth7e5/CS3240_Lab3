@@ -3,6 +3,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .scroll-container {
   height: 100vh;
   overflow-y: scroll;
@@ -45,6 +50,8 @@ body {
   animation: spotlight 0.5s ease 1;
   animation-fill-mode: forwards;
   animation-delay: 500ms;
+  cx: calc(10vw + 32px);
+  cy: 40%;
 }
 
 @keyframes spotlight {
@@ -68,11 +75,11 @@ body {
 .intro-content {
   pointer-events: none;
   position: absolute;
-  top: 64px;
-  left: calc(25% + 128px);
+  top: 80px;
+  left: 0;
   border-radius: 8px;
   z-index: 998;
-  width: 50vw;
+  width: 80vw;
   color: white;
   opacity: 0;
   animation: speech-bubble-anim 0.5s ease 1;
@@ -81,17 +88,13 @@ body {
 }
 
 .nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
 }
 
 #navbar {
-  position: absolute;
-  top: 0;
-  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav-list {
@@ -104,20 +107,26 @@ body {
 .list-icon i {
   font-size: 16px;
 }
+.list-icon span {
+  opacity: 1;
+  margin-left: 2px;
+  width: 94px;
+}
 .list-icon {
   position: absolute;
-  width: 26px;
-  height: 26px;
-  top: -13px;
-  left: -13px;
+  width: 128px;
+  height: 32px;
+  top: -16px;
+  left: -32px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  background-color: gray;
-  box-shadow: 0 0 4px 1px black;
+  border-radius: 8px;
+  background-color: #6c757d;
+  border: 1px solid white;
   z-index: 998;
-  opacity: 0;
+  opacity: 1;
 }
 
 .nav,
@@ -141,64 +150,20 @@ a {
   border-radius: 8px;
 }
 
-.nav-shadow {
-  box-shadow: 0 0 2px 2px #6c757d;
-}
-
-.nav-padding {
-  padding: 8px;
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-buttons {
-  width: 180px;
-}
-
-.nav-buttons .btn {
-  color: white;
-  border-color: white;
-}
-
-.nav-link {
-  padding: 0.25rem 0.5rem;
-  margin: 0.25rem 0.5rem;
-}
-
 .nav i,
 .nav-list i {
   color: inherit;
   padding: 4px;
 }
 
-.nav a:hover,
-.nav-list a:hover,
-.nav i:hover,
-.nav-list i:hover,
-.nav-list .active-light,
-.nav-item .active,
-.btn:hover {
-  background-color: white;
+.nav-list .active-light {
+  background-color: white !important;
   color: #6c757d;
   border-radius: 4px;
 }
 
-.nav-list a:hover,
-.nav-list i:hover,
 .nav-list .active-light {
   border-radius: 50%;
-}
-
-.light-nav:hover,
-.nav-item .active-light {
-  background-color: white;
-  color: #6c757d;
-  border-radius: 4px;
 }
 
 .social-icons {
@@ -220,11 +185,11 @@ a {
 
 .avatar-container {
   position: absolute;
-  top: calc(50vh - 64px);
-  left: calc(25% - 64px);
+  top: calc(60vh - 32px);
+  left: 10%;
   z-index: 9999;
-  width: 128px;
-  height: 128px;
+  width: 64px;
+  height: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -243,8 +208,8 @@ a {
 
 @keyframes avatar-popup {
   to {
-    width: 128px;
-    height: 128px;
+    width: 64px;
+    height: 64px;
   }
 }
 
@@ -405,13 +370,13 @@ a {
 
 .speech-bubble {
   position: absolute;
-  left: 160px;
-  top: -16px;
+  left: 100px;
+  top: 0;
   background: white;
   color: black;
-  border-radius: 0.4em;
-  padding: 8px;
-  font-size: 24px;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 20px;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -438,6 +403,128 @@ a {
 @keyframes speech-bubble-anim {
   to {
     opacity: 1;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .nav {
+    opacity: 1;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
+
+  #navbar {
+    opacity: 1;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+  }
+
+  .nav-shadow {
+    box-shadow: 0 0 2px 2px #6c757d;
+  }
+
+  .nav-padding {
+    padding: 8px;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-buttons {
+    width: 180px;
+  }
+
+  .nav-buttons .btn {
+    color: white;
+    border-color: white;
+  }
+
+  .nav-link {
+    padding: 0.25rem 0.5rem;
+    margin: 0.25rem 0.5rem;
+  }
+
+  .avatar-container {
+    top: calc(50vh - 64px);
+    left: calc(25% - 64px);
+    width: 128px;
+    height: 128px;
+  }
+
+  @keyframes avatar-popup {
+    to {
+      width: 128px;
+      height: 128px;
+    }
+  }
+
+  .mask circle {
+    r: 100%;
+    animation: spotlight 0.5s ease 1;
+    animation-fill-mode: forwards;
+    animation-delay: 500ms;
+    cx: 25%;
+    cy: 50%;
+  }
+
+  .speech-bubble {
+    left: 160px;
+    top: -16px;
+    padding: 8px;
+  }
+
+  .intro-content {
+    top: 64px;
+    left: calc(25% + 128px);
+    width: 50vw;
+  }
+
+  .list-icon i {
+    font-size: 16px;
+  }
+  .list-icon {
+    width: 26px;
+    height: 26px;
+    top: -13px;
+    left: -13px;
+    opacity: 0;
+  }
+
+  .nav a:hover,
+  .nav-list a:hover,
+  .nav i:hover,
+  .nav-list i:hover,
+  .nav-item .active,
+  .btn:hover {
+    background-color: white;
+    color: #6c757d;
+    border-radius: 4px;
+  }
+
+  .nav-list a:hover,
+  .nav-list i:hover {
+    border-radius: 50%;
+  }
+
+  .light-nav:hover,
+  .nav-item .active-light {
+    background-color: white;
+    color: #6c757d;
+    border-radius: 4px;
+  }
+
+  .list-icon span {
+    display: none;
   }
 }
 

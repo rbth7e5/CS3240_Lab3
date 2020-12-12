@@ -4570,10 +4570,10 @@ var dragElement = function dragElement(elmnt) {
 
 exports.dragElement = dragElement;
 var avatar = document.getElementById("avatar");
-var avatarOrigTopOffset = window.innerHeight / 2 - 64;
-var avatarOrigLeftOffset = window.innerWidth / 4 - 64;
-var avatarNewTopOffset = 64;
-var avatarNewLeftOffset = 64;
+var avatarOrigTopOffset = window.innerWidth > 768 ? window.innerHeight / 2 - 64 : window.innerHeight * 0.6 - 32;
+var avatarOrigLeftOffset = window.innerWidth > 768 ? window.innerWidth / 4 - 64 : window.innerWidth / 10;
+var avatarNewTopOffset = window.innerWidth > 768 ? 64 : window.innerWidth / 10;
+var avatarNewLeftOffset = window.innerWidth > 768 ? 64 : window.innerWidth / 10;
 var avatarCurrentTopOffset = avatar.offsetTop;
 var avatarCurrentLeftOffset = avatar.offsetLeft;
 var navAnimeRestore = (0, _animejs.default)({
@@ -4614,34 +4614,87 @@ var avatarAnime = (0, _animejs.default)({
   opacity: [1, 0.75],
   easing: "easeOutElastic(1, 1)"
 });
+var spacing = (window.innerWidth - window.innerWidth / 5 - 48) / 7;
 var navListAnimeRestore = (0, _animejs.default)({
   targets: ".nav-list .list-icon",
   translateX: function translateX(el, i) {
-    return [-88 * Math.sin((2.5 + 25 * i) / 180 * Math.PI), 0];
+    var coord = window.innerWidth > 768 ? -88 * Math.sin((2.5 + 25 * i) / 180 * Math.PI) : i * spacing;
+    return [coord, 0];
   },
-  translateY: function translateY(el, i) {
-    return [-88 * Math.cos((2.5 + 25 * i) / 180 * Math.PI), 0];
+  translateY: function translateY(el, i, len) {
+    var orig = window.innerWidth > 768 ? 0 : (i - len) * spacing * 1.1 - 32;
+    var coord = window.innerWidth > 768 ? -88 * Math.cos((2.5 + 25 * i) / 180 * Math.PI) : 32;
+    return [coord, orig];
   },
-  opacity: [1, 0],
+  left: [-16, -32],
+  opacity: function opacity() {
+    if (window.innerWidth > 768) {
+      return [1, 0];
+    }
+
+    return [1, 1];
+  },
+  width: function width() {
+    if (window.innerWidth > 768) {
+      return [26, 26];
+    }
+
+    return [32, 128];
+  },
+  borderRadius: ["16px", "8px"],
   delay: _animejs.default.stagger(30),
   autoplay: false,
-  zIndex: [998, -1]
+  zIndex: [998, -1],
+  easing: "easeOutElastic(1, 1)"
 });
 exports.navListAnimeRestore = navListAnimeRestore;
 var navListAnime = (0, _animejs.default)({
   targets: ".nav-list .list-icon",
   translateX: function translateX(el, i) {
-    return [0, -88 * Math.sin((2.5 + 25 * i) / 180 * Math.PI)];
+    var coord = window.innerWidth > 768 ? -88 * Math.sin((2.5 + 25 * i) / 180 * Math.PI) : i * spacing;
+    return [0, coord];
   },
-  translateY: function translateY(el, i) {
-    return [0, -88 * Math.cos((2.5 + 25 * i) / 180 * Math.PI)];
+  translateY: function translateY(el, i, len) {
+    var orig = window.innerWidth > 768 ? 0 : (i - len) * spacing * 1.1 - 32;
+    var coord = window.innerWidth > 768 ? -88 * Math.cos((2.5 + 25 * i) / 180 * Math.PI) : 32;
+    return [orig, coord];
   },
-  opacity: [0, 1],
+  left: [-32, -16],
+  opacity: function opacity() {
+    if (window.innerWidth > 768) {
+      return [0, 1];
+    }
+
+    return [1, 1];
+  },
+  width: function width() {
+    if (window.innerWidth > 768) {
+      return [26, 26];
+    }
+
+    return [128, 32];
+  },
+  borderRadius: ["8px", "16px"],
   delay: _animejs.default.stagger(30),
   autoplay: false,
-  zIndex: [-1, 998]
+  zIndex: [-1, 998],
+  easing: "easeOutElastic(1, 1)"
 });
 exports.navListAnime = navListAnime;
+var navListTextAnimeRestore = (0, _animejs.default)({
+  targets: ".nav-list .list-icon span",
+  opacity: [0, 1],
+  autoplay: false,
+  marginLeft: [0, 2],
+  width: [0, 94]
+});
+var navListTextAnime = (0, _animejs.default)({
+  targets: ".nav-list .list-icon span",
+  opacity: [1, 0],
+  autoplay: false,
+  marginLeft: [2, 0],
+  width: [94, 0]
+});
 var introTextAnimeRestore = (0, _animejs.default)({
   targets: "#intro-text",
   opacity: [0, 1],
@@ -4657,18 +4710,33 @@ var navToggle = false;
 var navAnimator = function navAnimator() {
   var scrollY = document.getElementById("scroll-container").scrollTop;
   var nav = document.getElementById("navbar");
+  var avatarNow = document.getElementById("avatar");
 
   if (scrollY > 0 && nav.offsetTop === 0 && !navToggle) {
     navAnime.play();
     avatarAnime.play();
+    navListTextAnime.play();
     navListAnime.play();
     introTextAnime.play();
     navToggle = true; // Fix animation playing twice when user over scrolls and it bounces back.
   } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
     introTextAnimeRestore.play();
     navListAnimeRestore.play();
+    navListTextAnimeRestore.play();
     avatarAnimeRestore.play();
     navAnimeRestore.play();
+    navToggle = false;
+  } else if (scrollY > 0 && !navToggle) {
+    avatarAnime.play();
+    navListTextAnime.play();
+    navListAnime.play();
+    introTextAnime.play();
+    navToggle = true;
+  } else if (scrollY === 0 && navToggle) {
+    introTextAnimeRestore.play();
+    navListAnimeRestore.play();
+    navListTextAnimeRestore.play();
+    avatarAnimeRestore.play();
     navToggle = false;
   }
 };
@@ -4760,7 +4828,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56696" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57050" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
