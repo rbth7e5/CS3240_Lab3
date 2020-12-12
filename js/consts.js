@@ -130,10 +130,16 @@ export const dragElement = (elmnt) => {
 };
 
 const avatar = document.getElementById("avatar");
-let avatarOrigTopOffset = window.innerHeight / 2 - 64;
-let avatarOrigLeftOffset = window.innerWidth / 4 - 64;
-const avatarNewTopOffset = 64;
-const avatarNewLeftOffset = 64;
+let avatarOrigTopOffset =
+  window.innerWidth > 768
+    ? window.innerHeight / 2 - 64
+    : window.innerHeight * 0.6 - 32;
+let avatarOrigLeftOffset =
+  window.innerWidth > 768 ? window.innerWidth / 4 - 64 : window.innerWidth / 10;
+const avatarNewTopOffset =
+  window.innerWidth > 768 ? 64 : window.innerWidth / 10;
+const avatarNewLeftOffset =
+  window.innerWidth > 768 ? 64 : window.innerWidth / 10;
 let avatarCurrentTopOffset = avatar.offsetTop;
 let avatarCurrentLeftOffset = avatar.offsetLeft;
 export const navAnimeRestore = anime({
@@ -172,31 +178,92 @@ const avatarAnime = anime({
   opacity: [1, 0.75],
   easing: "easeOutElastic(1, 1)",
 });
+const spacing = (window.innerWidth - window.innerWidth / 5 - 48) / 7;
 export const navListAnimeRestore = anime({
   targets: ".nav-list .list-icon",
   translateX: function (el, i) {
-    return [-88 * Math.sin(((2.5 + 25 * i) / 180) * Math.PI), 0];
+    const coord =
+      window.innerWidth > 768
+        ? -88 * Math.sin(((2.5 + 25 * i) / 180) * Math.PI)
+        : i * spacing;
+    return [coord, 0];
   },
-  translateY: function (el, i) {
-    return [-88 * Math.cos(((2.5 + 25 * i) / 180) * Math.PI), 0];
+  translateY: function (el, i, len) {
+    const orig = window.innerWidth > 768 ? 0 : (i - len) * spacing * 1.1 - 32;
+    const coord =
+      window.innerWidth > 768
+        ? -88 * Math.cos(((2.5 + 25 * i) / 180) * Math.PI)
+        : 32;
+    return [coord, orig];
   },
-  opacity: [1, 0],
+  left: [-16, -32],
+  opacity: function () {
+    if (window.innerWidth > 768) {
+      return [1, 0];
+    }
+    return [1, 1];
+  },
+  width: function () {
+    if (window.innerWidth > 768) {
+      return [26, 26];
+    }
+    return [32, 128];
+  },
+  borderRadius: ["16px", "8px"],
   delay: anime.stagger(30),
   autoplay: false,
   zIndex: [998, -1],
+  easing: "easeOutElastic(1, 1)",
 });
 export const navListAnime = anime({
   targets: ".nav-list .list-icon",
   translateX: function (el, i) {
-    return [0, -88 * Math.sin(((2.5 + 25 * i) / 180) * Math.PI)];
+    const coord =
+      window.innerWidth > 768
+        ? -88 * Math.sin(((2.5 + 25 * i) / 180) * Math.PI)
+        : i * spacing;
+    return [0, coord];
   },
-  translateY: function (el, i) {
-    return [0, -88 * Math.cos(((2.5 + 25 * i) / 180) * Math.PI)];
+  translateY: function (el, i, len) {
+    const orig = window.innerWidth > 768 ? 0 : (i - len) * spacing * 1.1 - 32;
+    const coord =
+      window.innerWidth > 768
+        ? -88 * Math.cos(((2.5 + 25 * i) / 180) * Math.PI)
+        : 32;
+    return [orig, coord];
   },
-  opacity: [0, 1],
+  left: [-32, -16],
+  opacity: function () {
+    if (window.innerWidth > 768) {
+      return [0, 1];
+    }
+    return [1, 1];
+  },
+  width: function () {
+    if (window.innerWidth > 768) {
+      return [26, 26];
+    }
+    return [128, 32];
+  },
+  borderRadius: ["8px", "16px"],
   delay: anime.stagger(30),
   autoplay: false,
   zIndex: [-1, 998],
+  easing: "easeOutElastic(1, 1)",
+});
+const navListTextAnimeRestore = anime({
+  targets: ".nav-list .list-icon span",
+  opacity: [0, 1],
+  autoplay: false,
+  marginLeft: [0, 2],
+  width: [0, 94],
+});
+const navListTextAnime = anime({
+  targets: ".nav-list .list-icon span",
+  opacity: [1, 0],
+  autoplay: false,
+  marginLeft: [2, 0],
+  width: [94, 0],
 });
 const introTextAnimeRestore = anime({
   targets: "#intro-text",
@@ -212,9 +279,11 @@ let navToggle = false;
 export const navAnimator = () => {
   let scrollY = document.getElementById("scroll-container").scrollTop;
   const nav = document.getElementById("navbar");
+  const avatarNow = document.getElementById("avatar");
   if (scrollY > 0 && nav.offsetTop === 0 && !navToggle) {
     navAnime.play();
     avatarAnime.play();
+    navListTextAnime.play();
     navListAnime.play();
     introTextAnime.play();
     navToggle = true;
@@ -222,8 +291,21 @@ export const navAnimator = () => {
   } else if (scrollY === 0 && nav.offsetTop !== 0 && navToggle) {
     introTextAnimeRestore.play();
     navListAnimeRestore.play();
+    navListTextAnimeRestore.play();
     avatarAnimeRestore.play();
     navAnimeRestore.play();
+    navToggle = false;
+  } else if (scrollY > 0 && !navToggle) {
+    avatarAnime.play();
+    navListTextAnime.play();
+    navListAnime.play();
+    introTextAnime.play();
+    navToggle = true;
+  } else if (scrollY === 0 && navToggle) {
+    introTextAnimeRestore.play();
+    navListAnimeRestore.play();
+    navListTextAnimeRestore.play();
+    avatarAnimeRestore.play();
     navToggle = false;
   }
 };
