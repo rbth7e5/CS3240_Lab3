@@ -1,6 +1,9 @@
 html,
 body {
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: no-content;
 }
 
 a:hover {
@@ -215,19 +218,16 @@ a {
 
 .project-main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 320px;
 }
 
 .project-image {
-  height: 320px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   flex: 1;
-  margin-right: 32px;
 }
 
 .project-desc {
@@ -266,15 +266,15 @@ a {
 }
 
 .about-content h1,
+.timeline-content h1,
 .about-content p {
   color: white;
 }
 
 .about-cards {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 32px;
 }
 
 .card {
@@ -331,6 +331,7 @@ a {
 }
 
 .timeline-point-image {
+  display: none;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -525,6 +526,25 @@ a {
 
   .list-icon span {
     display: none;
+  }
+
+  .project-main {
+    flex-direction: row;
+    height: 320px;
+  }
+
+  .project-image {
+    height: 320px;
+    margin-right: 32px;
+  }
+
+  .about-cards {
+    flex-direction: row;
+    margin-bottom: 32px;
+  }
+
+  .timeline-point-image {
+    display: block;
   }
 }
 
