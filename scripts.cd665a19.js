@@ -2179,7 +2179,7 @@ exports.resizeListener = resizeListener;
 var _consts = require("./consts");
 
 window.downloadResume = function () {
-  window.open('https://docs.google.com/document/d/1NPI-piwKe-UpZ0HXgYMwgq9PFD0h3gsX1yV5ZfGd3ko/edit?usp=sharing', '_blank').focus();
+  window.open("https://docs.google.com/document/d/1NPI-piwKe-UpZ0HXgYMwgq9PFD0h3gsX1yV5ZfGd3ko/edit?usp=sharing", "_blank").focus();
 };
 
 document.getElementById("resume-icon").onclick = downloadResume; // Add an event listener listening for scroll
@@ -2219,7 +2219,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49454" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49565" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
