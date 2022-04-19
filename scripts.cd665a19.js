@@ -1890,7 +1890,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resizeListener = exports.navListAnimeRestore = exports.navListAnime = exports.navHighlighter = exports.navAnimeRestore = exports.navAnime = exports.navAnimator = exports.dragElement = void 0;
+exports.resizeListener = exports.navAnimator = exports.navListAnime = exports.navListAnimeRestore = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = void 0;
 
 var _animejs = _interopRequireDefault(require("animejs"));
 
@@ -2179,7 +2179,7 @@ exports.resizeListener = resizeListener;
 var _consts = require("./consts");
 
 window.downloadResume = function () {
-  window.open("https://docs.google.com/document/d/1NPI-piwKe-UpZ0HXgYMwgq9PFD0h3gsX1yV5ZfGd3ko/edit?usp=sharing", "_blank").focus();
+  window.open('https://docs.google.com/document/d/1NPI-piwKe-UpZ0HXgYMwgq9PFD0h3gsX1yV5ZfGd3ko/edit?usp=sharing', '_blank').focus();
 };
 
 document.getElementById("resume-icon").onclick = downloadResume; // Add an event listener listening for scroll
@@ -2219,7 +2219,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49565" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54578" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
