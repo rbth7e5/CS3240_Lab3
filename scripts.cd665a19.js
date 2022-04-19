@@ -1890,7 +1890,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resizeListener = exports.navAnimator = exports.navListAnime = exports.navListAnimeRestore = exports.navAnime = exports.navAnimeRestore = exports.dragElement = exports.navHighlighter = void 0;
+exports.resizeListener = exports.navListAnimeRestore = exports.navListAnime = exports.navHighlighter = exports.navAnimeRestore = exports.navAnime = exports.navAnimator = exports.dragElement = void 0;
 
 var _animejs = _interopRequireDefault(require("animejs"));
 
@@ -2219,7 +2219,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54578" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49454" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
