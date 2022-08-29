@@ -90,6 +90,11 @@ a:hover {
   animation-delay: 1200ms;
 }
 
+.intro-content a {
+  pointer-events: auto;
+  text-decoration: underline;
+}
+
 .nav {
   opacity: 0;
   pointer-events: none;
@@ -484,7 +489,7 @@ a {
   }
 
   .intro-content {
-    top: 64px;
+    top: 48px;
     left: calc(25% + 128px);
     width: 50vw;
   }
