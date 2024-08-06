@@ -26,3 +26,13 @@ document
 dragElement(document.getElementById("avatar"));
 
 window.addEventListener("resize", resizeListener);
+
+window.addEventListener("load", function () {
+  this.setTimeout(() => {
+    const loader = document.getElementById("loader");
+    loader.remove();
+    this.document.body.className = "background";
+    this.document.getElementById("scroll-container").style.visibility =
+      "visible";
+  }, 1000);
+});
