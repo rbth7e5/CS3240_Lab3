@@ -34,5 +34,6 @@ window.addEventListener("load", function () {
     this.document.body.className = "background";
     this.document.getElementById("scroll-container").style.visibility =
       "visible";
+    this.document.getElementById("avatar").style.visibility = "visible";
   }, 1000);
 });
